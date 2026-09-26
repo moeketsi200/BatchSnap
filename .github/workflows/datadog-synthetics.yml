@@ -1,0 +1,28 @@
+name: Datadog Synthetics
+
+on:
+  push:
+    branches: [ "main" ]
+  workflow_dispatch:
+
+jobs:
+  run-synthetics:
+    name: Datadog Synthetic Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Run Datadog Synthetics
+        uses: DataDog/synthetics-ci-github-action@v2
+        with:
+          # You MUST set these in your GitHub Repository Secrets!
+          api_key: ${{ secrets.DD_API_KEY }}
+          app_key: ${{ secrets.DD_APP_KEY }}
+          
+          # Optional: Configure this to target specific synthetics tests or search queries
+          # public_ids: 'abc-d3f-ghi, jkl-mn0-pqr'
+          
+          # Fails the GitHub Action if the Datadog tests fail
+          fail_on_critical_errors: true
+          fail_on_timeout: true
