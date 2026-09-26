@@ -1,5 +1,5 @@
 import { randomBytes } from "node:crypto";
-import type { SerializedLabelUnit } from "./types.ts";
+import type { SerializedLabelUnit } from "./types";
 
 // Keccak-256 round constants (64-bit BigInts)
 const RC: bigint[] = [

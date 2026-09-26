@@ -1,7 +1,7 @@
 import { createHash } from "node:crypto";
 import { existsSync, readFileSync, writeFileSync } from "node:fs";
 import { join } from "node:path";
-import type { BatchMetadata } from "./types.ts";
+import type { BatchMetadata } from "./types";
 
 const LOCAL_STORE_PATH = join(process.cwd(), ".batchsnap-dev-store.json");
 

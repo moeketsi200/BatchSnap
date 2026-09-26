@@ -7,8 +7,8 @@ import {
   reportBatchTamper,
   verifyAndClaimBatch,
   verifyBatchReadOnly,
-} from "../batch-service.ts";
-import { hashSecret } from "../crypto.ts";
+} from "../batch-service";
+import { hashSecret } from "../crypto";
 
 async function runBackendTests() {
   const storePath = join(process.cwd(), ".batchsnap-dev-store.json");

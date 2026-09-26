@@ -27,3 +27,4 @@ artifacts/
 *.pem
 *.log
 .batchsnap-dev-store.json
+scratch/
