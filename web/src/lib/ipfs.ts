@@ -1,50 +1,6 @@
 import { createHash } from "node:crypto";
-import { existsSync, readFileSync, writeFileSync } from "node:fs";
-import { join } from "node:path";
+import { prisma } from "./db";
 import type { BatchMetadata } from "./types";
-
-const LOCAL_STORE_PATH = join(process.cwd(), ".batchsnap-dev-store.json");
-
-interface LocalDevStore {
-  ipfs: Record<string, BatchMetadata>;
-  nextBatchId: number;
-  batches: Record<
-    string,
-    {
-      batchId: number;
-      producer: `0x${string}`;
-      ipfsCID: string;
-      secretHash: `0x${string}`;
-      createdAt: number;
-      isClaimed: boolean;
-      claimedAt: number;
-      totalUnits: number;
-      claimedUnits: number;
-      units: Record<string, number>; // unitSecretHash => claimedTimestamp (0 if unclaimed)
-      tamperReports: Array<{ locationInfo: string; reportedAt: number }>;
-    }
-  >;
-}
-
-export function readLocalStore(): LocalDevStore {
-  try {
-    if (existsSync(LOCAL_STORE_PATH)) {
-      const raw = readFileSync(LOCAL_STORE_PATH, "utf-8");
-      return JSON.parse(raw) as LocalDevStore;
-    }
-  } catch {
-    // Fallback to fresh store if corrupted
-  }
-  return {
-    ipfs: {},
-    nextBatchId: 1001,
-    batches: {},
-  };
-}
-
-export function writeLocalStore(store: LocalDevStore): void {
-  writeFileSync(LOCAL_STORE_PATH, JSON.stringify(store, null, 2), "utf-8");
-}
 
 /**
  * Computes a deterministic CID-like identifier (`bafkrei...`) from JSON content
@@ -63,6 +19,10 @@ export async function pinMetadataToIPFS(
 ): Promise<{ cid: string; gatewayUrl: string; isLocalFallback: boolean }> {
   const serialized = JSON.stringify(metadata);
   const pinataJwt = process.env.PINATA_JWT;
+
+  let cid: string;
+  let gatewayUrl: string;
+  let isLocalFallback: boolean;
 
   if (pinataJwt && pinataJwt !== "your_pinata_jwt_here") {
     const response = await fetch("https://api.pinata.cloud/pinning/pinJSONToIPFS", {
@@ -85,44 +45,41 @@ export async function pinMetadataToIPFS(
     }
 
     const result = (await response.json()) as { IpfsHash: string };
-    const cid = result.IpfsHash;
-
-    // Also cache locally for fast reads
-    const store = readLocalStore();
-    store.ipfs[cid] = metadata;
-    writeLocalStore(store);
-
-    return {
-      cid,
-      gatewayUrl: `https://gateway.pinata.cloud/ipfs/${cid}`,
-      isLocalFallback: false,
-    };
+    cid = result.IpfsHash;
+    gatewayUrl = `https://gateway.pinata.cloud/ipfs/${cid}`;
+    isLocalFallback = false;
+  } else {
+    // Local deterministic CID fallback when PINATA_JWT is not set
+    cid = computeLocalCID(serialized);
+    gatewayUrl = `/api/ipfs/${cid}`;
+    isLocalFallback = true;
   }
 
-  // Local deterministic CID fallback when PINATA_JWT is not set
-  const cid = computeLocalCID(serialized);
-  const store = readLocalStore();
-  store.ipfs[cid] = metadata;
-  writeLocalStore(store);
+  // Cache locally for fast reads (SQLite)
+  await prisma.ipfsMetadata.upsert({
+    where: { cid },
+    update: { metadata: serialized },
+    create: { cid, metadata: serialized },
+  });
 
-  return {
-    cid,
-    gatewayUrl: `/api/ipfs/${cid}`,
-    isLocalFallback: true,
-  };
+  return { cid, gatewayUrl, isLocalFallback };
 }
 
 /**
- * Resolves `BatchMetadata` from local cache or public IPFS gateway.
+ * Resolves `BatchMetadata` from local SQLite cache or public IPFS gateway.
  */
 export async function fetchMetadataFromIPFS(
   cid: string
 ): Promise<BatchMetadata | null> {
   if (!cid) return null;
 
-  const store = readLocalStore();
-  if (store.ipfs[cid]) {
-    return store.ipfs[cid];
+  const localRecord = await prisma.ipfsMetadata.findUnique({ where: { cid } });
+  if (localRecord) {
+    try {
+      return JSON.parse(localRecord.metadata) as BatchMetadata;
+    } catch {
+      // Ignore JSON parse errors
+    }
   }
 
   // If not in local cache, fetch from public IPFS gateway

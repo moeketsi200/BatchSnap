@@ -8,5 +8,9 @@
     "build": "npm run build --prefix web",
     "test:contracts": "cd contracts && forge test -vvv",
     "test:backend": "npm run test:backend --prefix web"
+  },
+  "devDependencies": {
+    "@prisma/client": "^5.22.0",
+    "prisma": "^5.22.0"
   }
 }

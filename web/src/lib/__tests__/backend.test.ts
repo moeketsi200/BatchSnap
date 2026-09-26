@@ -1,6 +1,5 @@
 import assert from "node:assert/strict";
-import { rmSync } from "node:fs";
-import { join } from "node:path";
+import { prisma } from "../db";
 import {
   createAndAnchorBatch,
   listBatches,
@@ -10,9 +9,15 @@ import {
 } from "../batch-service";
 import { hashSecret } from "../crypto";
 
+async function clearDB() {
+  await prisma.tamperReport.deleteMany({});
+  await prisma.unit.deleteMany({});
+  await prisma.batch.deleteMany({});
+  await prisma.ipfsMetadata.deleteMany({});
+}
+
 async function runBackendTests() {
-  const storePath = join(process.cwd(), ".batchsnap-dev-store.json");
-  rmSync(storePath, { force: true });
+  await clearDB();
 
   console.log("1. Testing Ethereum Keccak-256 vector compatibility...");
   const emptyKeccak = hashSecret("");
@@ -93,7 +98,7 @@ async function runBackendTests() {
   assert.equal(allBatches[0].claimedUnits, 2);
   assert.equal(allBatches[0].tamperReportCount, 1);
 
-  rmSync(storePath, { force: true });
+  await clearDB();
   console.log("\n✅ All BatchSnap backend tests passed!");
 }
 
