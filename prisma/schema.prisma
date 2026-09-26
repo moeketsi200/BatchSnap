@@ -1,0 +1,44 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider  = "postgresql"
+  url       = env("POSTGRES_URL")
+}
+
+model IpfsMetadata {
+  cid       String   @id
+  metadata  String   // JSON stringified BatchMetadata
+  createdAt DateTime @default(now())
+}
+
+model Batch {
+  batchId       Int      @id
+  producer      String
+  ipfsCID       String
+  secretHash    String   @unique
+  createdAt     Int      // Unix timestamp
+  isClaimed     Boolean  @default(false)
+  claimedAt     Int      @default(0) // 0 if unclaimed
+  totalUnits    Int
+  claimedUnits  Int      @default(0)
+  
+  units         Unit[]
+  tamperReports TamperReport[]
+}
+
+model Unit {
+  secretHash  String    @id
+  batchId     Int
+  batch       Batch     @relation(fields: [batchId], references: [batchId])
+  claimedAt   Int       @default(0) // 0 if unclaimed
+}
+
+model TamperReport {
+  id           Int      @id @default(autoincrement())
+  batchId      Int
+  batch        Batch    @relation(fields: [batchId], references: [batchId])
+  locationInfo String
+  reportedAt   Int
+}
