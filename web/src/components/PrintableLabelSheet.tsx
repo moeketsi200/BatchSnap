@@ -53,8 +53,8 @@ const COLOR_THEMES: Record<
   forest: { // Cyberpunk Neon
     name: "Cyber Neon",
     swatch: "#06b6d4",
-    qrFg: "#06b6d4", // Neon Cyan
-    qrBg: "transparent",
+    qrFg: "#082f49", // Neon Cyan
+    qrBg: "#ffffff",
     badgeBg: "#06b6d4",
     badgeText: "#000000",
     producerColor: "#22d3ee",
@@ -65,8 +65,8 @@ const COLOR_THEMES: Record<
   espresso: { // Dark Matter
     name: "Dark Matter",
     swatch: "#818cf8",
-    qrFg: "#818cf8",
-    qrBg: "transparent",
+    qrFg: "#1e1b4b",
+    qrBg: "#ffffff",
     badgeBg: "#6366f1",
     badgeText: "#ffffff",
     producerColor: "#a5b4fc",
@@ -77,8 +77,8 @@ const COLOR_THEMES: Record<
   terracotta: { // Matrix Green
     name: "Matrix Code",
     swatch: "#22c55e",
-    qrFg: "#22c55e",
-    qrBg: "transparent",
+    qrFg: "#052e16",
+    qrBg: "#ffffff",
     badgeBg: "#22c55e",
     badgeText: "#000000",
     producerColor: "#4ade80",
@@ -89,8 +89,8 @@ const COLOR_THEMES: Record<
   monochrome: { // Minimal Web3
     name: "ZK Monochrome",
     swatch: "#fafafa",
-    qrFg: "#fafafa",
-    qrBg: "transparent",
+    qrFg: "#09090b",
+    qrBg: "#ffffff",
     badgeBg: "#fafafa",
     badgeText: "#000000",
     producerColor: "#e4e4e7",
@@ -402,7 +402,7 @@ export function PrintableLabelSheet({
               className={`print-label-card relative flex items-center gap-3 bg-white/5 backdrop-blur-md print:bg-white p-3.5 transition hover:shadow-[0_0_15px_rgba(6,182,212,0.15)] ${borderCss}`}
             >
               {/* Scannable Vector QR Code with Lucide Outline Emblem */}
-              <div className="shrink-0 rounded-xl border border-[#3f3f46] print:border-slate-300 p-1.5 bg-[#09090b] print:bg-white shadow-sm"
+              <div className="shrink-0 rounded-xl border border-cyan-500/30 print:border-slate-300 p-1.5 bg-white shadow-[0_0_15px_rgba(255,255,255,0.1)]"
                 style={{ borderColor: theme.borderColor }}
               >
                 <QrMatrixSvg
