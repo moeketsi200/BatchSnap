@@ -5,14 +5,14 @@ import {
   reportBatchTamper,
   verifyAndClaimBatch,
   verifyBatchReadOnly,
-} from "./contract.ts";
-import { generateSerializedLabels } from "./crypto.ts";
-import { pinMetadataToIPFS } from "./ipfs.ts";
+} from "./contract";
+import { generateSerializedLabels } from "./crypto";
+import { pinMetadataToIPFS } from "./ipfs";
 import type {
   BatchMetadata,
   CreateBatchRequest,
   CreateBatchResponse,
-} from "./types.ts";
+} from "./types";
 
 const DEFAULT_PRODUCER_ADDRESS =
   "0x71C95911E9a5D330f4D621842EC243EE1343292e" as `0x${string}`;

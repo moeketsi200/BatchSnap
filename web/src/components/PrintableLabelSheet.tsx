@@ -7,6 +7,24 @@ import type {
   LabelTemplateType,
   ProductCategory,
 } from "@/lib/types";
+import {
+  ArrowUpRightIcon,
+  AwardIcon,
+  CalendarIcon,
+  DatabaseIcon,
+  EmblemIcon,
+  type EmblemIconName,
+  LayoutGridIcon,
+  LockIcon,
+  MapPinIcon,
+  PaletteIcon,
+  PrinterIcon,
+  QrCodeIcon,
+  ScanLineIcon,
+  ScissorsIcon,
+  ShieldCheckIcon,
+  TagIcon,
+} from "./LucideIcons";
 import { QrMatrixSvg } from "./QrMatrixSvg";
 
 interface PrintableLabelSheetProps {
@@ -21,7 +39,6 @@ const COLOR_THEMES: Record<
   StickerColorTheme,
   {
     name: string;
-    emoji: string;
     swatch: string;
     qrFg: string;
     qrBg: string;
@@ -33,84 +50,78 @@ const COLOR_THEMES: Record<
     accentPillText: string;
   }
 > = {
-  forest: {
-    name: "Botanical Forest",
-    emoji: "🌲",
-    swatch: "#1B4332",
-    qrFg: "#1B4332",
-    qrBg: "#FFFDF9",
-    badgeBg: "#1B4332",
-    badgeText: "#FAF6F0",
-    producerColor: "#2D6A4F",
-    borderColor: "#B7C9BD",
-    accentPillBg: "#E9F5EE",
-    accentPillText: "#1B4332",
+  forest: { // Cyberpunk Neon
+    name: "Cyber Neon",
+    swatch: "#06b6d4",
+    qrFg: "#083344", // dark cyan for QR on white so it scans well
+    qrBg: "#ffffff",
+    badgeBg: "#06b6d4",
+    badgeText: "#000000",
+    producerColor: "#0891b2",
+    borderColor: "#164e63",
+    accentPillBg: "#cffafe",
+    accentPillText: "#164e63",
   },
-  espresso: {
-    name: "Artisan Espresso",
-    emoji: "☕",
-    swatch: "#3E2723",
-    qrFg: "#2B1B17",
-    qrBg: "#FFFDF9",
-    badgeBg: "#3E2723",
-    badgeText: "#FDF8F5",
-    producerColor: "#6D4C41",
-    borderColor: "#D7CCC8",
-    accentPillBg: "#F5EBE6",
-    accentPillText: "#3E2723",
+  espresso: { // Dark Matter
+    name: "Dark Matter",
+    swatch: "#6366f1",
+    qrFg: "#1e1b4b",
+    qrBg: "#ffffff",
+    badgeBg: "#6366f1",
+    badgeText: "#ffffff",
+    producerColor: "#4f46e5",
+    borderColor: "#3730a3",
+    accentPillBg: "#e0e7ff",
+    accentPillText: "#312e81",
   },
-  terracotta: {
-    name: "Harvest Terracotta",
-    emoji: "🏺",
-    swatch: "#9A3412",
-    qrFg: "#7C2D12",
-    qrBg: "#FFFDF9",
-    badgeBg: "#9A3412",
-    badgeText: "#FFF7ED",
-    producerColor: "#B45309",
-    borderColor: "#FCD34D",
-    accentPillBg: "#FEF3C7",
-    accentPillText: "#92400E",
+  terracotta: { // Matrix Green
+    name: "Matrix Code",
+    swatch: "#22c55e",
+    qrFg: "#052e16",
+    qrBg: "#ffffff",
+    badgeBg: "#22c55e",
+    badgeText: "#000000",
+    producerColor: "#16a34a",
+    borderColor: "#14532d",
+    accentPillBg: "#dcfce7",
+    accentPillText: "#14532d",
   },
-  monochrome: {
-    name: "Thermal Ink Black",
-    emoji: "🖤",
-    swatch: "#111827",
-    qrFg: "#090D16",
-    qrBg: "#FFFFFF",
-    badgeBg: "#111827",
-    badgeText: "#FFFFFF",
-    producerColor: "#374151",
-    borderColor: "#D1D5DB",
-    accentPillBg: "#F3F4F6",
-    accentPillText: "#111827",
+  monochrome: { // Minimal Web3
+    name: "ZK Monochrome",
+    swatch: "#09090b",
+    qrFg: "#000000",
+    qrBg: "#ffffff",
+    badgeBg: "#000000",
+    badgeText: "#ffffff",
+    producerColor: "#3f3f46",
+    borderColor: "#d4d4d8",
+    accentPillBg: "#f4f4f5",
+    accentPillText: "#18181b",
   },
 };
 
-const CATEGORY_BADGE_EMBLEM: Record<ProductCategory, string> = {
-  honey: "🍯",
-  coffee: "☕",
-  "olive-oil": "🫒",
-  cosmetics: "🌿",
-  "wine-spirits": "🍷",
-  other: "✨",
+const CATEGORY_DEFAULT_ICON: Record<ProductCategory, EmblemIconName> = {
+  honey: "droplets",
+  coffee: "coffee",
+  "olive-oil": "leaf",
+  cosmetics: "flask",
+  "wine-spirits": "wine",
+  other: "shield-check",
 };
 
-const EMOJI_PALETTE = [
-  "🍯",
-  "🐝",
-  "☕",
-  "🫒",
-  "🌿",
-  "🍷",
-  "🍫",
-  "🌶️",
-  "🧀",
-  "🌱",
-  "✨",
-  "🛡️",
-  "👑",
-  "🏔️",
+const LUCIDE_EMBLEM_OPTIONS: Array<{ name: EmblemIconName; label: string }> = [
+  { name: "shield-check", label: "Shield Seal" },
+  { name: "leaf", label: "Botanical Leaf" },
+  { name: "coffee", label: "Roast Cup" },
+  { name: "droplets", label: "Pure Drop" },
+  { name: "flask", label: "Lab Flask" },
+  { name: "wine", label: "Estate Reserve" },
+  { name: "award", label: "Quality Ribbon" },
+  { name: "sparkles", label: "Artisan Craft" },
+  { name: "crown", label: "Heritage Crown" },
+  { name: "mountain", label: "Highland Origin" },
+  { name: "flower", label: "Wild Blossom" },
+  { name: "package", label: "Batch Parcel" },
 ];
 
 export function PrintableLabelSheet({
@@ -122,16 +133,16 @@ export function PrintableLabelSheet({
   const [borderStyle, setBorderStyle] = useState<StickerBorderStyle>("dashed");
   const [showCenterBadge, setShowCenterBadge] = useState<boolean>(true);
   const [showScratchPin, setShowScratchPin] = useState<boolean>(true);
-  const [selectedEmoji, setSelectedEmoji] = useState<string>(
-    CATEGORY_BADGE_EMBLEM[batchData.metadata.category] || "🍯"
+  const [selectedIcon, setSelectedIcon] = useState<EmblemIconName>(
+    CATEGORY_DEFAULT_ICON[batchData.metadata.category] || "shield-check"
   );
   const [customSealText, setCustomSealText] = useState<string>(
     "VERIFIED ORIGIN"
   );
 
   useEffect(() => {
-    setSelectedEmoji(
-      CATEGORY_BADGE_EMBLEM[batchData.metadata.category] || "✨"
+    setSelectedIcon(
+      CATEGORY_DEFAULT_ICON[batchData.metadata.category] || "shield-check"
     );
   }, [batchData.metadata.category]);
 
@@ -162,19 +173,21 @@ export function PrintableLabelSheet({
   return (
     <div className="space-y-5">
       {/* Sticker Customization Studio Toolbar (hidden when printing) */}
-      <div className="no-print rounded-3xl border border-[#E2D9C5] bg-[#FFFDF9] p-5 shadow-sm space-y-4">
-        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[#EFE8D8] pb-4">
+      <div className="no-print rounded-3xl border border-[#27272a] bg-[#18181b] p-5 shadow-sm space-y-4">
+        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[#27272a] pb-4">
           <div>
             <div className="flex items-center gap-2">
-              <span className="inline-flex items-center gap-1 rounded-full bg-emerald-900/10 px-3 py-0.5 text-xs font-bold text-emerald-900 border border-emerald-800/20">
-                ✨ Batch #{batchData.batchId} Anchored
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-cyan-900/20 px-3 py-1 text-xs font-bold text-cyan-400 border border-cyan-800/30">
+                <ShieldCheckIcon size={14} className="text-cyan-400" />
+                Batch #{batchData.batchId} Anchored
               </span>
-              <span className="text-xs font-mono text-stone-500">
-                🏷️ {batchData.labels.length} Serialized Stickers
+              <span className="inline-flex items-center gap-1 text-xs font-mono text-slate-500">
+                <TagIcon size={13} />
+                {batchData.labels.length} Serialized Stickers
               </span>
             </div>
-            <p className="mt-1 text-xs text-stone-600">
-              📱 Real camera-scannable ISO QR codes • Customize your sticker emoji, colors &amp; border below.
+            <p className="mt-1.5 text-xs text-slate-400">
+              Real camera-scannable ISO QR codes with Lucide vector outline emblems.
             </p>
           </div>
 
@@ -183,50 +196,54 @@ export function PrintableLabelSheet({
               <Link
                 href={`/v/${batchData.batchId}?secret=${batchData.labels[0].secret}`}
                 target="_blank"
-                className="rounded-xl border border-emerald-800/30 bg-emerald-50/80 px-3.5 py-2 text-xs font-bold text-emerald-900 hover:bg-emerald-100 transition"
+                className="inline-flex items-center gap-1.5 rounded-xl border border-[#27272a] bg-[#18181b] px-3.5 py-2 text-xs font-bold text-cyan-400 hover:bg-emerald-100 transition"
               >
-                🔍 Test Scan Unit #1
+                <ScanLineIcon size={14} />
+                Test Scan Unit #1
               </Link>
             )}
 
             <button
               type="button"
               onClick={handlePrint}
-              className="rounded-xl bg-[#1B4332] px-4 py-2 text-xs font-bold text-[#FAF6F0] shadow-sm hover:bg-[#2D6A4F] transition"
+              className="inline-flex items-center gap-1.5 rounded-xl bg-cyan-500 shadow-[0_0_10px_rgba(6,182,212,0.3)] px-4 py-2 text-xs font-bold text-[#09090b] shadow-sm hover:bg-[#2D6A4F] transition"
             >
-              🖨️ Print / Save PDF Sheet
+              <PrinterIcon size={14} />
+              Print / Save PDF Sheet
             </button>
           </div>
         </div>
 
-        {/* Emoji Emblem Picker Bar */}
-        <div className="rounded-2xl border border-[#EFE8D8] bg-[#FAF6F0] p-3">
-          <div className="flex flex-wrap items-center justify-between gap-2 mb-2">
-            <span className="text-[11px] font-extrabold uppercase tracking-wider text-stone-600">
-              🎨 Pick Sticker &amp; QR Center Emoji Emblem
+        {/* Lucide Vector Emblem Picker Bar */}
+        <div className="rounded-2xl border border-[#27272a] bg-[#09090b] p-3.5">
+          <div className="flex flex-wrap items-center justify-between gap-2 mb-2.5">
+            <span className="inline-flex items-center gap-1.5 text-[11px] font-extrabold uppercase tracking-wider text-slate-400">
+              <QrCodeIcon size={14} className="text-cyan-400" />
+              Select Lucide Vector QR Center Emblem
             </span>
-            <span className="text-[11px] text-stone-500">
-              Active Emblem: <strong className="text-base">{selectedEmoji}</strong>
+            <span className="inline-flex items-center gap-1.5 text-[11px] font-semibold text-slate-400">
+              Active Icon:
+              <EmblemIcon name={selectedIcon} size={15} className="text-cyan-400" />
             </span>
           </div>
           <div className="flex flex-wrap items-center gap-1.5">
-            {EMOJI_PALETTE.map((emoji) => {
-              const active = selectedEmoji === emoji;
+            {LUCIDE_EMBLEM_OPTIONS.map((item) => {
+              const active = selectedIcon === item.name;
               return (
                 <button
-                  key={emoji}
+                  key={item.name}
                   type="button"
+                  title={item.label}
                   onClick={() => {
-                    setSelectedEmoji(emoji);
+                    setSelectedIcon(item.name);
                     setShowCenterBadge(true);
                   }}
-                  className={`flex h-9 w-9 items-center justify-center rounded-xl border text-lg transition ${
-                    active
-                      ? "border-[#1B4332] bg-[#1B4332] text-white shadow-sm scale-105"
-                      : "border-[#D8CEB8] bg-white hover:border-stone-400"
+                  className={`inline-flex items-center gap-1.5 rounded-xl border px-2.5 py-1.5 text-xs font-semibold transition ${
+                    active ? "border-cyan-500 bg-cyan-500/10 text-cyan-400 shadow-[0_0_10px_rgba(6,182,212,0.2)]" : "border-[#3f3f46] bg-[#09090b] text-slate-400 hover:border-slate-500"
                   }`}
                 >
-                  {emoji}
+                  <EmblemIcon name={item.name} size={15} />
+                  <span className="hidden sm:inline text-[11px]">{item.label}</span>
                 </button>
               );
             })}
@@ -237,24 +254,26 @@ export function PrintableLabelSheet({
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 text-xs">
           {/* 1. Sheet Template */}
           <div>
-            <label className="block font-bold uppercase tracking-wider text-[10px] text-stone-500 mb-1.5">
-              📐 Label Sheet Format
+            <label className="flex items-center gap-1.5 font-bold uppercase tracking-wider text-[10px] text-slate-500 mb-1.5">
+              <LayoutGridIcon size={12} />
+              Label Sheet Format
             </label>
             <select
               value={template}
               onChange={(e) => setTemplate(e.target.value as LabelTemplateType)}
-              className="w-full rounded-xl border border-[#D8CEB8] bg-[#FAF6F0] px-3 py-2 text-xs font-semibold text-stone-800 focus:border-[#1B4332] focus:outline-none"
+              className="w-full rounded-xl border border-[#3f3f46] bg-[#09090b] px-3 py-2 text-xs font-semibold text-slate-200 focus:border-[#1B4332] focus:outline-none"
             >
-              <option value="avery-5160">📄 Avery 5160 (30-up Sheet)</option>
-              <option value="avery-5163">📦 Avery 5163 (10-up Large Jar)</option>
-              <option value="thermal-roll">🎞️ 2&quot; × 2&quot; Thermal Roll</option>
+              <option value="avery-5160">Avery 5160 (30-up Sheet)</option>
+              <option value="avery-5163">Avery 5163 (10-up Large Jar)</option>
+              <option value="thermal-roll">2&quot; × 2&quot; Thermal Roll</option>
             </select>
           </div>
 
           {/* 2. Color Palette */}
           <div>
-            <label className="block font-bold uppercase tracking-wider text-[10px] text-stone-500 mb-1.5">
-              🎨 Ink &amp; Seal Palette
+            <label className="flex items-center gap-1.5 font-bold uppercase tracking-wider text-[10px] text-slate-500 mb-1.5">
+              <PaletteIcon size={12} />
+              Ink &amp; Seal Palette
             </label>
             <div className="flex items-center gap-1.5">
               {(Object.keys(COLOR_THEMES) as StickerColorTheme[]).map((key) => {
@@ -266,13 +285,14 @@ export function PrintableLabelSheet({
                     type="button"
                     onClick={() => setColorTheme(key)}
                     title={item.name}
-                    className={`flex items-center gap-1 rounded-xl border px-2 py-1.5 font-semibold transition ${
-                      active
-                        ? "border-stone-900 bg-stone-900 text-white shadow-sm"
-                        : "border-[#D8CEB8] bg-[#FAF6F0] text-stone-700 hover:border-stone-400"
+                    className={`flex items-center gap-1.5 rounded-xl border px-2.5 py-1.5 font-semibold transition ${
+                      active ? "border-cyan-500 bg-cyan-500/10 text-cyan-400 shadow-[0_0_10px_rgba(6,182,212,0.2)]" : "border-[#3f3f46] bg-[#09090b] text-slate-400 hover:border-slate-500"
                     }`}
                   >
-                    <span>{item.emoji}</span>
+                    <span
+                      className="h-3 w-3 rounded-full border border-white/40"
+                      style={{ backgroundColor: item.swatch }}
+                    />
                     <span className="hidden xl:inline">
                       {item.name.split(" ")[1]}
                     </span>
@@ -284,50 +304,54 @@ export function PrintableLabelSheet({
 
           {/* 3. Border Cut Style */}
           <div>
-            <label className="block font-bold uppercase tracking-wider text-[10px] text-stone-500 mb-1.5">
-              ✂️ Border / Frame Style
+            <label className="flex items-center gap-1.5 font-bold uppercase tracking-wider text-[10px] text-slate-500 mb-1.5">
+              <ScissorsIcon size={12} />
+              Border / Frame Style
             </label>
             <select
               value={borderStyle}
               onChange={(e) =>
                 setBorderStyle(e.target.value as StickerBorderStyle)
               }
-              className="w-full rounded-xl border border-[#D8CEB8] bg-[#FAF6F0] px-3 py-2 text-xs font-semibold text-stone-800 focus:border-[#1B4332] focus:outline-none"
+              className="w-full rounded-xl border border-[#3f3f46] bg-[#09090b] px-3 py-2 text-xs font-semibold text-slate-200 focus:border-[#1B4332] focus:outline-none"
             >
-              <option value="dashed">✂️ Perforated Craft Cut (Dashed)</option>
-              <option value="double">🏛️ Apothecary Double Frame</option>
-              <option value="stamp">🏵️ Estate Wax Stamp (Rounded)</option>
-              <option value="solid">📏 Minimal Hairline (Solid)</option>
+              <option value="dashed">Perforated Craft Cut (Dashed)</option>
+              <option value="double">Apothecary Double Frame</option>
+              <option value="stamp">Estate Wax Stamp (Rounded)</option>
+              <option value="solid">Minimal Hairline (Solid)</option>
             </select>
           </div>
 
           {/* 4. Seal & Badge Toggles */}
           <div>
-            <label className="block font-bold uppercase tracking-wider text-[10px] text-stone-500 mb-1.5">
-              🛡️ QR Logo &amp; Security Strip
+            <label className="flex items-center gap-1.5 font-bold uppercase tracking-wider text-[10px] text-slate-500 mb-1.5">
+              <ShieldCheckIcon size={12} />
+              QR Emblem &amp; PIN Strip
             </label>
             <div className="flex items-center gap-2">
               <button
                 type="button"
                 onClick={() => setShowCenterBadge((v) => !v)}
-                className={`flex-1 rounded-xl border px-2.5 py-2 font-semibold transition ${
+                className={`inline-flex flex-1 items-center justify-center gap-1.5 rounded-xl border px-2.5 py-2 font-semibold transition ${
                   showCenterBadge
-                    ? "border-emerald-800 bg-emerald-900/10 text-emerald-950"
-                    : "border-[#D8CEB8] bg-[#FAF6F0] text-stone-500"
+                    ? "border-emerald-800 bg-cyan-900/20 text-emerald-950"
+                    : "border-[#3f3f46] bg-[#09090b] text-slate-500"
                 }`}
               >
-                {showCenterBadge ? `${selectedEmoji} QR Logo` : "🚫 No Logo"}
+                <EmblemIcon name={selectedIcon} size={13} />
+                {showCenterBadge ? "Emblem On" : "Emblem Off"}
               </button>
               <button
                 type="button"
                 onClick={() => setShowScratchPin((v) => !v)}
-                className={`flex-1 rounded-xl border px-2.5 py-2 font-semibold transition ${
+                className={`inline-flex flex-1 items-center justify-center gap-1.5 rounded-xl border px-2.5 py-2 font-semibold transition ${
                   showScratchPin
                     ? "border-amber-800 bg-amber-900/10 text-amber-950"
-                    : "border-[#D8CEB8] bg-[#FAF6F0] text-stone-500"
+                    : "border-[#3f3f46] bg-[#09090b] text-slate-500"
                 }`}
               >
-                {showScratchPin ? "🔐 PIN On" : "🚫 PIN Off"}
+                <LockIcon size={13} />
+                {showScratchPin ? "PIN On" : "PIN Off"}
               </button>
             </div>
           </div>
@@ -336,34 +360,37 @@ export function PrintableLabelSheet({
         {/* Custom Seal Banner Text */}
         <div className="flex flex-wrap items-center justify-between gap-3 pt-1 text-xs">
           <div className="flex items-center gap-2">
-            <span className="font-semibold text-stone-600">
-              🏅 Seal Ribbon Text:
+            <span className="inline-flex items-center gap-1.5 font-semibold text-slate-400">
+              <AwardIcon size={14} className="text-cyan-400" />
+              Seal Ribbon Text:
             </span>
             <input
               type="text"
               maxLength={24}
               value={customSealText}
               onChange={(e) => setCustomSealText(e.target.value)}
-              className="rounded-lg border border-[#D8CEB8] bg-[#FAF6F0] px-2.5 py-1 text-xs font-bold uppercase tracking-wider text-stone-800 focus:border-[#1B4332] focus:outline-none"
+              className="rounded-lg border border-[#3f3f46] bg-[#09090b] px-2.5 py-1 text-xs font-bold uppercase tracking-wider text-slate-200 focus:border-[#1B4332] focus:outline-none"
             />
           </div>
-          <span className="font-mono text-[11px] text-stone-500">
-            📌 IPFS CID: {batchData.ipfsCID.slice(0, 22)}…
+          <span className="inline-flex items-center gap-1.5 font-mono text-[11px] text-slate-500">
+            <DatabaseIcon size={13} />
+            IPFS CID: {batchData.ipfsCID.slice(0, 22)}…
           </span>
         </div>
       </div>
 
       {/* Printable Label Sheet Surface */}
-      <div className="print-sheet rounded-3xl border border-[#E2D9C5] bg-white p-6 text-stone-900 shadow-md">
-        <div className="no-print mb-4 flex flex-wrap items-center justify-between gap-2 border-b border-stone-200 pb-3 text-xs text-stone-500">
-          <span>
-            🖨️ Print Sheet Preview:{" "}
-            <strong className="text-stone-800 uppercase">{template}</strong> •{" "}
-            {selectedEmoji} {batchData.metadata.productName} (
-            {batchData.metadata.batchCode})
+      <div className="print-sheet rounded-3xl border border-[#27272a] bg-[#09090b] p-6 text-white shadow-[0_0_30px_rgba(0,0,0,0.5)]">
+        <div className="no-print mb-4 flex flex-wrap items-center justify-between gap-2 border-b border-stone-200 pb-3 text-xs text-slate-500">
+          <span className="inline-flex items-center gap-1.5">
+            <PrinterIcon size={14} className="text-slate-300" />
+            Print Sheet Preview:{" "}
+            <strong className="text-slate-200 uppercase">{template}</strong> •{" "}
+            {batchData.metadata.productName} ({batchData.metadata.batchCode})
           </span>
-          <span className="text-[11px] text-emerald-800 font-semibold">
-            📷 Point your phone camera at any QR code below to verify
+          <span className="inline-flex items-center gap-1.5 text-[11px] text-emerald-800 font-semibold">
+            <ScanLineIcon size={14} />
+            Point your phone camera at any QR code below to verify
           </span>
         </div>
 
@@ -372,11 +399,10 @@ export function PrintableLabelSheet({
             <div
               key={unit.unitNumber}
               style={{ borderColor: theme.borderColor }}
-              className={`print-label-card relative flex items-center gap-3 bg-[#FFFDF9] p-3.5 transition hover:shadow-md ${borderCss}`}
+              className={`print-label-card relative flex items-center gap-3 bg-white p-3.5 transition hover:shadow-md ${borderCss}`}
             >
-              {/* Scannable Vector QR Code */}
-              <div
-                className="shrink-0 rounded-xl border p-1.5 bg-white shadow-sm"
+              {/* Scannable Vector QR Code with Lucide Outline Emblem */}
+              <div className="shrink-0 rounded-xl border p-1.5 bg-white shadow-sm"
                 style={{ borderColor: theme.borderColor }}
               >
                 <QrMatrixSvg
@@ -384,7 +410,7 @@ export function PrintableLabelSheet({
                   size={template === "avery-5163" ? 96 : 78}
                   fgColor={theme.qrFg}
                   bgColor={theme.qrBg}
-                  badgeText={selectedEmoji}
+                  emblemIcon={selectedIcon}
                   showBadge={showCenterBadge}
                 />
               </div>
@@ -393,10 +419,11 @@ export function PrintableLabelSheet({
               <div className="min-w-0 flex-1">
                 <div className="flex items-center justify-between gap-1">
                   <span
-                    className="truncate text-[10px] font-extrabold uppercase tracking-widest"
+                    className="inline-flex items-center gap-1 truncate text-[10px] font-extrabold uppercase tracking-widest"
                     style={{ color: theme.producerColor }}
                   >
-                    {selectedEmoji} {batchData.metadata.producerName}
+                    <EmblemIcon name={selectedIcon} size={12} />
+                    <span className="truncate">{batchData.metadata.producerName}</span>
                   </span>
                   <span
                     className="shrink-0 rounded-md px-1.5 py-0.5 font-mono text-[10px] font-bold"
@@ -410,29 +437,37 @@ export function PrintableLabelSheet({
                   </span>
                 </div>
 
-                <p className="truncate text-sm font-black text-stone-900 mt-0.5">
+                <p className="truncate text-sm font-black text-black mt-0.5">
                   {batchData.metadata.productName}
                 </p>
 
-                <p className="text-[11px] font-medium text-stone-600 truncate">
-                  📍 {batchData.metadata.originRegion} • 🗓️{" "}
-                  {batchData.metadata.harvestOrProductionDate}
+                <p className="mt-0.5 flex items-center gap-2 text-[11px] font-medium text-slate-700 truncate">
+                  <span className="inline-flex items-center gap-0.5 truncate">
+                    <MapPinIcon size={11} />
+                    {batchData.metadata.originRegion}
+                  </span>
+                  <span className="inline-flex items-center gap-0.5 shrink-0">
+                    <CalendarIcon size={11} />
+                    {batchData.metadata.harvestOrProductionDate}
+                  </span>
                 </p>
 
                 <div className="mt-1.5 flex items-center justify-between gap-1.5">
                   <span
-                    className="inline-block rounded px-1.5 py-0.5 text-[9px] font-extrabold uppercase tracking-wider"
+                    className="inline-flex items-center gap-1 rounded px-1.5 py-0.5 text-[9px] font-extrabold uppercase tracking-wider"
                     style={{
                       backgroundColor: theme.accentPillBg,
                       color: theme.accentPillText,
                     }}
                   >
-                    🛡️ {customSealText || "VERIFIED ORIGIN"}
+                    <ShieldCheckIcon size={10} />
+                    {customSealText || "VERIFIED ORIGIN"}
                   </span>
 
                   {showScratchPin && (
-                    <span className="rounded border border-stone-300 bg-stone-100 px-1.5 py-0.5 font-mono text-[10px] text-stone-700">
-                      🔐 <strong className="text-stone-950">{unit.secret}</strong>
+                    <span className="inline-flex items-center gap-1 rounded border border-slate-300 bg-slate-100 px-1.5 py-0.5 font-mono text-[10px] text-slate-800">
+                      <LockIcon size={10} />
+                      <strong className="text-black">{unit.secret}</strong>
                     </span>
                   )}
                 </div>
@@ -441,10 +476,11 @@ export function PrintableLabelSheet({
                   <Link
                     href={`/v/${batchData.batchId}?secret=${unit.secret}`}
                     target="_blank"
-                    className="text-[10px] font-bold hover:underline"
+                    className="inline-flex items-center gap-1 text-[10px] font-bold hover:underline"
                     style={{ color: theme.producerColor }}
                   >
-                    📲 Simulate Scan →
+                    Simulate Scan
+                    <ArrowUpRightIcon size={11} />
                   </Link>
                 </div>
               </div>

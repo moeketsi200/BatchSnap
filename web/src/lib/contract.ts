@@ -1,11 +1,11 @@
 import { createHash } from "node:crypto";
-import { hashSecret } from "./crypto.ts";
-import { fetchMetadataFromIPFS, readLocalStore, writeLocalStore } from "./ipfs.ts";
+import { hashSecret } from "./crypto";
+import { fetchMetadataFromIPFS, readLocalStore, writeLocalStore } from "./ipfs";
 import type {
   BatchMetadata,
   OnChainBatch,
   VerificationResponse,
-} from "./types.ts";
+} from "./types";
 
 /**
  * Full ABI for `contracts/src/BatchRegistry.sol`

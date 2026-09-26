@@ -2,28 +2,29 @@
 
 import React from "react";
 import QRCode from "qrcode";
+import { type EmblemIconName, renderEmblemPaths } from "./LucideIcons";
 
 export interface QrMatrixSvgProps {
   value: string;
   size?: number;
   fgColor?: string;
   bgColor?: string;
-  badgeText?: string;
+  emblemIcon?: EmblemIconName;
   showBadge?: boolean;
   className?: string;
 }
 
 /**
  * Renders a 100% real, camera-scannable ISO/IEC 18004 QR code as a crisp vector SVG
- * using the `qrcode` library, with support for custom ink colors and an optional
- * high-error-correction center emblem badge.
+ * using the `qrcode` library, with support for custom ink colors and an embedded
+ * Lucide vector outline icon badge in the center.
  */
 export function QrMatrixSvg({
   value,
   size = 88,
   fgColor = "#1B4332",
   bgColor = "#FFFFFF",
-  badgeText = "✓",
+  emblemIcon = "shield-check",
   showBadge = false,
   className = "",
 }: QrMatrixSvgProps) {
@@ -52,7 +53,9 @@ export function QrMatrixSvg({
   const quietZone = 2;
   const totalViewSize = qrData.moduleCount + quietZone * 2;
   const centerPos = totalViewSize / 2;
-  const badgeBoxSize = totalViewSize * 0.24;
+  const badgeBoxSize = totalViewSize * 0.25;
+  const iconPadding = badgeBoxSize * 0.16;
+  const iconScale = (badgeBoxSize - iconPadding * 2) / 24;
 
   return (
     <svg
@@ -87,21 +90,23 @@ export function QrMatrixSvg({
             y={centerPos - badgeBoxSize / 2}
             width={badgeBoxSize}
             height={badgeBoxSize}
-            rx={1.2}
+            rx={1.4}
             fill={bgColor}
             stroke={fgColor}
             strokeWidth={0.45}
           />
-          <text
-            x={centerPos}
-            y={centerPos + badgeBoxSize * 0.26}
-            textAnchor="middle"
-            fontSize={badgeBoxSize * 0.65}
-            fill={fgColor}
-            fontWeight="bold"
+          <g
+            transform={`translate(${centerPos - badgeBoxSize / 2 + iconPadding}, ${
+              centerPos - badgeBoxSize / 2 + iconPadding
+            }) scale(${iconScale})`}
+            fill="none"
+            stroke={fgColor}
+            strokeWidth={2.2}
+            strokeLinecap="round"
+            strokeLinejoin="round"
           >
-            {badgeText}
-          </text>
+            {renderEmblemPaths(emblemIcon)}
+          </g>
         </g>
       )}
     </svg>
