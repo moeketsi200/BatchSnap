@@ -1,0 +1,29 @@
+# Dependencies
+node_modules/
+.pnp
+.pnp.js
+
+# Next.js
+.next/
+out/
+build/
+dist/
+
+# Foundry & Solidity IDE artifacts
+contracts/out/
+contracts/cache/
+contracts/lib/
+.deps/
+.states/
+artifacts/
+
+# Environment variables
+.env
+.env.*
+!.env.example
+
+# Local dev data & OS
+.DS_Store
+*.pem
+*.log
+.batchsnap-dev-store.json
