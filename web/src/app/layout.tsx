@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "BatchSnap 📦⚡ | Web3 Batch Provenance & Cryptographic Label Studio",
+  title: "BatchSnap | Web3 Provenance Studio",
   description:
     "Create immutable product records, anchor them to public Layer 2 chains, and print customizable cryptographic QR labels in under 60 seconds.",
 };
