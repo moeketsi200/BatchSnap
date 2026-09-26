@@ -124,6 +124,14 @@ const LUCIDE_EMBLEM_OPTIONS: Array<{ name: EmblemIconName; label: string }> = [
   { name: "package", label: "Batch Parcel" },
 ];
 
+
+function getScannableUrl(url: string) {
+  if (typeof window !== "undefined" && url.includes("localhost")) {
+    return url.replace("http://localhost:3000", window.location.origin);
+  }
+  return url;
+}
+
 export function PrintableLabelSheet({
   batchData,
   initialTemplate = "avery-5160",
@@ -406,7 +414,7 @@ export function PrintableLabelSheet({
                 style={{ borderColor: theme.borderColor }}
               >
                 <QrMatrixSvg
-                  value={unit.verifyUrl}
+                  value={getScannableUrl(unit.verifyUrl)}
                   size={template === "avery-5163" ? 96 : 78}
                   fgColor={theme.qrFg}
                   bgColor={theme.qrBg}

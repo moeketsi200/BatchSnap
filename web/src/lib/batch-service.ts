@@ -39,7 +39,7 @@ export async function createAndAnchorBatch(
   }
 
   const unitCount = Math.max(1, Math.min(Number(input.unitCount || 1), 500));
-  const nextBatchId = peekNextBatchId();
+  const nextBatchId = await peekNextBatchId();
   const producerAddress = input.producerAddress || DEFAULT_PRODUCER_ADDRESS;
 
   const metadata: BatchMetadata = {
@@ -80,7 +80,7 @@ export async function createAndAnchorBatch(
   return {
     batchId: anchored.batchId,
     ipfsCID,
-    txHash: anchored.txHash,
+    txHash: anchored.txHash as `0x${string}`,
     chainId: anchored.chainId,
     batch: anchored.batch,
     metadata,

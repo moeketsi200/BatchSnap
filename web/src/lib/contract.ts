@@ -38,7 +38,7 @@ export async function anchorBatchOnChain(input: {
         batchId,
         producer: input.producer,
         ipfsCID: input.ipfsCID,
-        secretHash: input.primarySecretHash,
+        secretHash: input.primarySecretHash as `0x${string}`,
         createdAt: nowSeconds,
         totalUnits: input.unitSecretHashes.length,
       }
@@ -59,7 +59,7 @@ export async function anchorBatchOnChain(input: {
     batchId,
     producer: input.producer,
     ipfsCID: input.ipfsCID,
-    secretHash: input.primarySecretHash,
+    secretHash: input.primarySecretHash as `0x${string}`,
     createdAt: nowSeconds,
     isClaimed: false,
   };
@@ -107,7 +107,7 @@ export async function verifyBatchReadOnly(
     batchId: record.batchId,
     producer: record.producer as `0x${string}`,
     ipfsCID: record.ipfsCID,
-    secretHash: record.secretHash,
+    secretHash: record.secretHash as `0x${string}`,
     createdAt: record.createdAt,
     isClaimed: record.isClaimed,
   };
@@ -261,7 +261,7 @@ export async function listBatches(producerAddress?: string): Promise<
         batchId: item.batchId,
         producer: item.producer as `0x${string}`,
         ipfsCID: item.ipfsCID,
-        secretHash: item.secretHash,
+        secretHash: item.secretHash as `0x${string}`,
         createdAt: item.createdAt,
         isClaimed: item.isClaimed,
       },
