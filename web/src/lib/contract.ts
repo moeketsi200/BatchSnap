@@ -51,8 +51,7 @@ export async function anchorBatchOnChain(input: {
     
     // Prisma bulk create
     await tx.unit.createMany({
-      data: unitData,
-      skipDuplicates: true
+      data: unitData
     });
   });
 
