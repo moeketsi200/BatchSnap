@@ -140,7 +140,7 @@ export default function ProducerDashboardPage() {
 
   const fetchBatches = async () => {
     try {
-      const res = await fetch("/api/batches");
+      const res = await fetch("/api/batches", { cache: "no-store", headers: { "Cache-Control": "no-cache" } });
       if (!res.ok) return;
       const data = (await res.json()) as { batches: BatchSummaryItem[] };
       setRecentBatches(data.batches || []);

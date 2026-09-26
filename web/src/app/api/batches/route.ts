@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server";
 import { createAndAnchorBatch, listBatches } from "@/lib/batch-service";
 import type { CreateBatchRequest } from "@/lib/types";
 
+export const dynamic = 'force-dynamic';
+
 export async function GET(req: NextRequest) {
   try {
     const producer = req.nextUrl.searchParams.get("producer") || undefined;
