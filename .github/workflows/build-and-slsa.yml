@@ -40,7 +40,8 @@ jobs:
 
       - name: Archive build artifacts
         working-directory: ./web
-        run: tar -czf ../batchsnap-release.tar.gz .next public package.json
+        # REMOVED 'public' from the tar command because the directory doesn't exist
+        run: tar -czf ../batchsnap-release.tar.gz .next package.json
 
       - name: Generate subject hashes for SLSA
         id: hash
