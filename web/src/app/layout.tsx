@@ -14,18 +14,20 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="relative min-h-screen bg-[#09090b] text-slate-300 antialiased selection:bg-cyan-500/20 selection:text-cyan-200">
+      <body className="relative min-h-screen bg-[#050505] text-slate-300 antialiased selection:bg-cyan-500/20 selection:text-cyan-200">
         
-        {/* Web3 Background Elements */}
+        {/* Premium Web3 Animated Background */}
         <div className="pointer-events-none fixed inset-0 z-[-1] overflow-hidden print:hidden">
-          {/* Subtle Grid */}
-          <div className="absolute inset-0 bg-[linear-gradient(to_right,#3f3f462e_1px,transparent_1px),linear-gradient(to_bottom,#3f3f462e_1px,transparent_1px)] bg-[size:32px_32px] [mask-image:radial-gradient(ellipse_80%_80%_at_50%_0%,#000_70%,transparent_100%)]" />
+          {/* Animated Glass/Aurora Blobs */}
+          <div className="absolute top-[-10%] left-[-10%] h-[600px] w-[600px] rounded-full bg-cyan-600/20 blur-[120px] animate-blob mix-blend-screen" />
+          <div className="absolute top-[20%] right-[-10%] h-[700px] w-[700px] rounded-full bg-fuchsia-600/15 blur-[120px] animate-blob animation-delay-2000 mix-blend-screen" />
+          <div className="absolute bottom-[-20%] left-[20%] h-[800px] w-[800px] rounded-full bg-emerald-600/15 blur-[120px] animate-blob animation-delay-4000 mix-blend-screen" />
           
-          {/* Top Center Glow (Cyan) */}
-          <div className="absolute top-[-10%] left-1/2 -translate-x-1/2 h-[500px] w-[900px] rounded-full bg-cyan-600/15 blur-[120px]" />
+          {/* Sharp Tech Grid */}
+          <div className="absolute inset-0 bg-[linear-gradient(rgba(255,255,255,0.02)_1px,transparent_1px),linear-gradient(90deg,rgba(255,255,255,0.02)_1px,transparent_1px)] bg-[size:64px_64px] [mask-image:radial-gradient(ellipse_80%_80%_at_50%_50%,#000_20%,transparent_100%)]" />
 
-          {/* Bottom Right Glow (Indigo) */}
-          <div className="absolute bottom-[-20%] right-[-10%] h-[500px] w-[600px] rounded-full bg-indigo-600/10 blur-[120px]" />
+          {/* Premium Matte Noise Overlay */}
+          <div className="absolute inset-0 bg-noise mix-blend-overlay opacity-40" />
         </div>
 
         {children}

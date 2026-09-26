@@ -206,7 +206,7 @@ export default function ProducerDashboardPage() {
   return (
     <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
       {/* Web3 Studio Header (hidden when printing) */}
-      <header className="no-print mb-10 flex flex-wrap items-center justify-between gap-6 border-b border-[#27272a] pb-8 pt-4">
+      <header className="no-print mb-10 flex flex-wrap items-center justify-between gap-6 border-b border-white/10 pb-8 pt-4">
         <div className="flex items-center gap-3.5">
           <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-cyan-500/10 text-cyan-400 shadow-sm">
             <PackageIcon size={24} />
@@ -228,17 +228,17 @@ export default function ProducerDashboardPage() {
         </div>
 
         <div className="flex flex-wrap items-center gap-2.5 text-xs">
-          <div className="inline-flex items-center gap-1.5 rounded-xl border border-[#27272a] bg-[#18181b] px-3.5 py-2 shadow-sm">
+          <div className="inline-flex items-center gap-1.5 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md px-3.5 py-2 shadow-sm">
             <Link2Icon size={14} className="text-cyan-400" />
             <span className="text-slate-500">Network:</span>
             <strong className="text-slate-200">Base L2 (84532)</strong>
           </div>
-          <div className="inline-flex items-center gap-1.5 rounded-xl border border-[#27272a] bg-[#18181b] px-3.5 py-2 shadow-sm">
+          <div className="inline-flex items-center gap-1.5 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md px-3.5 py-2 shadow-sm">
             <DatabaseIcon size={14} className="text-cyan-400" />
             <span className="text-slate-500">Pinning:</span>
             <strong className="text-cyan-400">IPFS Immutable CID</strong>
           </div>
-          <div className="inline-flex items-center gap-1.5 rounded-xl border border-[#27272a] bg-[#18181b] px-3.5 py-2 shadow-sm">
+          <div className="inline-flex items-center gap-1.5 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md px-3.5 py-2 shadow-sm">
             <ShieldCheckIcon size={14} className="text-cyan-400" />
             <span className="text-slate-500">Security:</span>
             <strong className="text-slate-200">Single-Claim QR</strong>
@@ -249,8 +249,8 @@ export default function ProducerDashboardPage() {
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
         {/* Left Column: Producer Batch Form & Registry */}
         <section className="no-print lg:col-span-5 space-y-6">
-          <div className="rounded-3xl border border-[#27272a] bg-[#18181b] p-6 shadow-sm">
-            <div className="mb-4 flex items-center justify-between border-b border-[#27272a] pb-3">
+          <div className="rounded-3xl border border-white/10 bg-[#09090b]/40 backdrop-blur-2xl p-6 shadow-2xl">
+            <div className="mb-4 flex items-center justify-between border-b border-white/10 pb-3">
               <div>
                 <span className="inline-flex items-center gap-1 text-[10px] font-extrabold uppercase tracking-widest text-cyan-400">
                   <SparklesIcon size={12} />
@@ -260,7 +260,7 @@ export default function ProducerDashboardPage() {
                   Create &amp; Anchor Batch
                 </h2>
               </div>
-              <span className="inline-flex items-center gap-1 rounded-xl bg-[#09090b] border border-[#27272a] px-2.5 py-1 font-mono text-[11px] font-bold text-slate-300">
+              <span className="inline-flex items-center gap-1 rounded-xl bg-[#09090b] border border-white/10 px-2.5 py-1 font-mono text-[11px] font-bold text-slate-300">
                 <ZapIcon size={12} className="text-cyan-400" />
                 60s Flow
               </span>
@@ -280,7 +280,7 @@ export default function ProducerDashboardPage() {
                       type="button"
                       onClick={() => applyPreset(preset)}
                       className={`inline-flex items-center gap-1.5 rounded-xl border px-2.5 py-1.5 text-xs font-semibold transition ${
-                        active ? "border-cyan-400 bg-cyan-500/10 text-cyan-400 shadow-[0_0_10px_rgba(6,182,212,0.2)]" : "border-[#3f3f46] bg-[#18181b] text-slate-400 hover:border-slate-500"
+                        active ? "border-cyan-400 bg-cyan-500/10 text-cyan-400 shadow-[0_0_10px_rgba(6,182,212,0.2)]" : "border-[#3f3f46] bg-white/5 backdrop-blur-md text-slate-400 hover:border-slate-500"
                       }`}
                     >
                       <EmblemIcon name={preset.icon} size={14} />
@@ -302,7 +302,7 @@ export default function ProducerDashboardPage() {
                   required
                   value={productName}
                   onChange={(e) => setProductName(e.target.value)}
-                  className="w-full rounded-xl border border-[#3f3f46] bg-[#09090b] px-3.5 py-2 text-sm font-medium text-white focus:border-cyan-400 focus:bg-[#18181b] focus:outline-none"
+                  className="w-full rounded-xl border border-[#3f3f46] bg-[#09090b] px-3.5 py-2 text-sm font-medium text-white focus:border-cyan-400 focus:bg-white/5 backdrop-blur-md focus:outline-none"
                 />
               </div>
 
@@ -317,7 +317,7 @@ export default function ProducerDashboardPage() {
                     onChange={(e) =>
                       setCategory(e.target.value as ProductCategory)
                     }
-                    className="w-full rounded-xl border border-[#3f3f46] bg-[#09090b] px-3 py-2 text-sm font-medium text-white focus:border-cyan-400 focus:bg-[#18181b] focus:outline-none"
+                    className="w-full rounded-xl border border-[#3f3f46] bg-[#09090b] px-3 py-2 text-sm font-medium text-white focus:border-cyan-400 focus:bg-white/5 backdrop-blur-md focus:outline-none"
                   >
                     <option value="honey">Honey &amp; Apiary</option>
                     <option value="coffee">Specialty Coffee</option>
@@ -338,7 +338,7 @@ export default function ProducerDashboardPage() {
                     required
                     value={harvestDate}
                     onChange={(e) => setHarvestDate(e.target.value)}
-                    className="w-full rounded-xl border border-[#3f3f46] bg-[#09090b] px-3 py-2 text-sm font-medium text-white focus:border-cyan-400 focus:bg-[#18181b] focus:outline-none"
+                    className="w-full rounded-xl border border-[#3f3f46] bg-[#09090b] px-3 py-2 text-sm font-medium text-white focus:border-cyan-400 focus:bg-white/5 backdrop-blur-md focus:outline-none"
                   />
                 </div>
               </div>
@@ -354,7 +354,7 @@ export default function ProducerDashboardPage() {
                     required
                     value={producerName}
                     onChange={(e) => setProducerName(e.target.value)}
-                    className="w-full rounded-xl border border-[#3f3f46] bg-[#09090b] px-3.5 py-2 text-sm font-medium text-white focus:border-cyan-400 focus:bg-[#18181b] focus:outline-none"
+                    className="w-full rounded-xl border border-[#3f3f46] bg-[#09090b] px-3.5 py-2 text-sm font-medium text-white focus:border-cyan-400 focus:bg-white/5 backdrop-blur-md focus:outline-none"
                   />
                 </div>
 
@@ -368,7 +368,7 @@ export default function ProducerDashboardPage() {
                     required
                     value={originRegion}
                     onChange={(e) => setOriginRegion(e.target.value)}
-                    className="w-full rounded-xl border border-[#3f3f46] bg-[#09090b] px-3.5 py-2 text-sm font-medium text-white focus:border-cyan-400 focus:bg-[#18181b] focus:outline-none"
+                    className="w-full rounded-xl border border-[#3f3f46] bg-[#09090b] px-3.5 py-2 text-sm font-medium text-white focus:border-cyan-400 focus:bg-white/5 backdrop-blur-md focus:outline-none"
                   />
                 </div>
               </div>
@@ -383,7 +383,7 @@ export default function ProducerDashboardPage() {
                     type="text"
                     value={coaValue}
                     onChange={(e) => setCoaValue(e.target.value)}
-                    className="w-full rounded-xl border border-[#3f3f46] bg-[#09090b] px-3.5 py-2 text-sm font-medium text-white focus:border-cyan-400 focus:bg-[#18181b] focus:outline-none"
+                    className="w-full rounded-xl border border-[#3f3f46] bg-[#09090b] px-3.5 py-2 text-sm font-medium text-white focus:border-cyan-400 focus:bg-white/5 backdrop-blur-md focus:outline-none"
                   />
                 </div>
 
@@ -396,7 +396,7 @@ export default function ProducerDashboardPage() {
                     type="text"
                     value={purityValue}
                     onChange={(e) => setPurityValue(e.target.value)}
-                    className="w-full rounded-xl border border-[#3f3f46] bg-[#09090b] px-3.5 py-2 text-sm font-medium text-white focus:border-cyan-400 focus:bg-[#18181b] focus:outline-none"
+                    className="w-full rounded-xl border border-[#3f3f46] bg-[#09090b] px-3.5 py-2 text-sm font-medium text-white focus:border-cyan-400 focus:bg-white/5 backdrop-blur-md focus:outline-none"
                   />
                 </div>
               </div>
@@ -410,7 +410,7 @@ export default function ProducerDashboardPage() {
                   rows={2}
                   value={storyNote}
                   onChange={(e) => setStoryNote(e.target.value)}
-                  className="w-full rounded-xl border border-[#3f3f46] bg-[#09090b] px-3.5 py-2 text-sm font-medium text-white focus:border-cyan-400 focus:bg-[#18181b] focus:outline-none"
+                  className="w-full rounded-xl border border-[#3f3f46] bg-[#09090b] px-3.5 py-2 text-sm font-medium text-white focus:border-cyan-400 focus:bg-white/5 backdrop-blur-md focus:outline-none"
                 />
               </div>
 
@@ -427,7 +427,7 @@ export default function ProducerDashboardPage() {
                     required
                     value={unitCount}
                     onChange={(e) => setUnitCount(Number(e.target.value))}
-                    className="w-full rounded-xl border border-[#3f3f46] bg-[#09090b] px-3.5 py-2 text-sm font-bold text-white focus:border-cyan-400 focus:bg-[#18181b] focus:outline-none"
+                    className="w-full rounded-xl border border-[#3f3f46] bg-[#09090b] px-3.5 py-2 text-sm font-bold text-white focus:border-cyan-400 focus:bg-white/5 backdrop-blur-md focus:outline-none"
                   />
                 </div>
 
@@ -441,7 +441,7 @@ export default function ProducerDashboardPage() {
                     onChange={(e) =>
                       setLabelTemplate(e.target.value as LabelTemplateType)
                     }
-                    className="w-full rounded-xl border border-[#3f3f46] bg-[#09090b] px-3 py-2 text-sm font-medium text-white focus:border-cyan-400 focus:bg-[#18181b] focus:outline-none"
+                    className="w-full rounded-xl border border-[#3f3f46] bg-[#09090b] px-3 py-2 text-sm font-medium text-white focus:border-cyan-400 focus:bg-white/5 backdrop-blur-md focus:outline-none"
                   >
                     <option value="avery-5160">Avery 5160 (30-up)</option>
                     <option value="avery-5163">Avery 5163 (10-up)</option>
@@ -471,7 +471,7 @@ export default function ProducerDashboardPage() {
           </div>
 
           {/* Anchored Batches Ledger */}
-          <div className="rounded-3xl border border-[#27272a] bg-[#18181b] p-5 shadow-sm">
+          <div className="rounded-3xl border border-white/10 bg-[#09090b]/40 backdrop-blur-2xl p-5 shadow-2xl">
             <div className="flex items-center justify-between mb-3">
               <div>
                 <h3 className="flex items-center gap-1.5 text-sm font-black text-white">
@@ -502,7 +502,7 @@ export default function ProducerDashboardPage() {
                 {recentBatches.map((item) => (
                   <div
                     key={item.batch.batchId}
-                    className="flex items-center justify-between rounded-2xl border border-[#27272a] bg-[#09090b] p-3 text-xs"
+                    className="flex items-center justify-between rounded-2xl border border-white/10 bg-[#09090b] p-3 text-xs"
                   >
                     <div className="min-w-0">
                       <div className="flex items-center gap-2">
@@ -519,7 +519,7 @@ export default function ProducerDashboardPage() {
                     </div>
 
                     <div className="text-right shrink-0">
-                      <span className="inline-flex items-center gap-1 rounded-lg border border-[#3f3f46] bg-[#18181b] px-2.5 py-1 font-mono text-[11px] font-bold text-slate-200">
+                      <span className="inline-flex items-center gap-1 rounded-lg border border-[#3f3f46] bg-white/5 backdrop-blur-md px-2.5 py-1 font-mono text-[11px] font-bold text-slate-200">
                         <ShieldCheckIcon size={12} className="text-cyan-400" />
                         {item.claimedUnits}/{item.totalUnits} Claimed
                       </span>
@@ -545,11 +545,11 @@ export default function ProducerDashboardPage() {
               initialTemplate={labelTemplate}
             />
           ) : (
-            <div className="no-print flex h-full min-h-[460px] flex-col items-center justify-center rounded-3xl border-2 border-dashed border-[#3f3f46] bg-[#18181b]/70 p-10 text-center">
+            <div className="no-print flex h-full min-h-[460px] flex-col items-center justify-center rounded-3xl border-2 border-dashed border-[#3f3f46] bg-white/5 backdrop-blur-md/70 p-10 text-center">
               <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-cyan-950/50 border border-cyan-900/50 text-cyan-400">
                 <QrCodeIcon size={30} />
               </div>
-              <span className="inline-flex items-center gap-1.5 rounded-full bg-[#09090b] border border-[#27272a] px-3 py-0.5 text-[11px] font-bold uppercase tracking-wider text-slate-400">
+              <span className="inline-flex items-center gap-1.5 rounded-full bg-[#09090b] border border-white/10 px-3 py-0.5 text-[11px] font-bold uppercase tracking-wider text-slate-400">
                 <PrinterIcon size={12} />
                 Step 2 • Sticker Customizer &amp; Print Studio
               </span>

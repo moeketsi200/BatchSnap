@@ -173,8 +173,8 @@ export function PrintableLabelSheet({
   return (
     <div className="space-y-5">
       {/* Sticker Customization Studio Toolbar (hidden when printing) */}
-      <div className="no-print rounded-3xl border border-[#27272a] bg-[#18181b] p-5 shadow-sm space-y-4">
-        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-[#27272a] pb-4">
+      <div className="no-print rounded-3xl border border-white/10 bg-[#09090b]/40 backdrop-blur-2xl p-5 shadow-2xl space-y-4">
+        <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-4">
           <div>
             <div className="flex items-center gap-2">
               <span className="inline-flex items-center gap-1.5 rounded-full bg-cyan-900/20 px-3 py-1 text-xs font-bold text-cyan-400 border border-cyan-800/30">
@@ -196,7 +196,7 @@ export function PrintableLabelSheet({
               <Link
                 href={`/v/${batchData.batchId}?secret=${batchData.labels[0].secret}`}
                 target="_blank"
-                className="inline-flex items-center gap-1.5 rounded-xl border border-[#27272a] bg-[#18181b] px-3.5 py-2 text-xs font-bold text-cyan-400 hover:bg-emerald-100 transition"
+                className="inline-flex items-center gap-1.5 rounded-xl border border-white/10 bg-white/5 backdrop-blur-md px-3.5 py-2 text-xs font-bold text-cyan-400 hover:bg-emerald-100 transition"
               >
                 <ScanLineIcon size={14} />
                 Test Scan Unit #1
@@ -215,7 +215,7 @@ export function PrintableLabelSheet({
         </div>
 
         {/* Lucide Vector Emblem Picker Bar */}
-        <div className="rounded-2xl border border-[#27272a] bg-[#09090b] p-3.5">
+        <div className="rounded-2xl border border-white/10 bg-[#09090b] p-3.5">
           <div className="flex flex-wrap items-center justify-between gap-2 mb-2.5">
             <span className="inline-flex items-center gap-1.5 text-[11px] font-extrabold uppercase tracking-wider text-slate-400">
               <QrCodeIcon size={14} className="text-cyan-400" />
@@ -239,7 +239,7 @@ export function PrintableLabelSheet({
                     setShowCenterBadge(true);
                   }}
                   className={`inline-flex items-center gap-1.5 rounded-xl border px-2.5 py-1.5 text-xs font-semibold transition ${
-                    active ? "border-cyan-500 bg-cyan-500/10 text-cyan-400 shadow-[0_0_10px_rgba(6,182,212,0.2)]" : "border-[#3f3f46] bg-[#09090b] text-slate-400 hover:border-slate-500"
+                    active ? "border-cyan-500 bg-cyan-500/10 text-cyan-400 shadow-[0_0_10px_rgba(6,182,212,0.2)]" : "border-white/10 bg-white/5 text-slate-400 hover:border-slate-500"
                   }`}
                 >
                   <EmblemIcon name={item.name} size={15} />
@@ -261,7 +261,7 @@ export function PrintableLabelSheet({
             <select
               value={template}
               onChange={(e) => setTemplate(e.target.value as LabelTemplateType)}
-              className="w-full rounded-xl border border-[#3f3f46] bg-[#09090b] px-3 py-2 text-xs font-semibold text-slate-200 focus:border-[#1B4332] focus:outline-none"
+              className="w-full rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-xs font-semibold text-slate-200 focus:border-[#1B4332] focus:outline-none"
             >
               <option value="avery-5160">Avery 5160 (30-up Sheet)</option>
               <option value="avery-5163">Avery 5163 (10-up Large Jar)</option>
@@ -286,7 +286,7 @@ export function PrintableLabelSheet({
                     onClick={() => setColorTheme(key)}
                     title={item.name}
                     className={`flex items-center gap-1.5 rounded-xl border px-2.5 py-1.5 font-semibold transition ${
-                      active ? "border-cyan-500 bg-cyan-500/10 text-cyan-400 shadow-[0_0_10px_rgba(6,182,212,0.2)]" : "border-[#3f3f46] bg-[#09090b] text-slate-400 hover:border-slate-500"
+                      active ? "border-cyan-500 bg-cyan-500/10 text-cyan-400 shadow-[0_0_10px_rgba(6,182,212,0.2)]" : "border-white/10 bg-white/5 text-slate-400 hover:border-slate-500"
                     }`}
                   >
                     <span
@@ -313,7 +313,7 @@ export function PrintableLabelSheet({
               onChange={(e) =>
                 setBorderStyle(e.target.value as StickerBorderStyle)
               }
-              className="w-full rounded-xl border border-[#3f3f46] bg-[#09090b] px-3 py-2 text-xs font-semibold text-slate-200 focus:border-[#1B4332] focus:outline-none"
+              className="w-full rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-xs font-semibold text-slate-200 focus:border-[#1B4332] focus:outline-none"
             >
               <option value="dashed">Perforated Craft Cut (Dashed)</option>
               <option value="double">Apothecary Double Frame</option>
@@ -335,7 +335,7 @@ export function PrintableLabelSheet({
                 className={`inline-flex flex-1 items-center justify-center gap-1.5 rounded-xl border px-2.5 py-2 font-semibold transition ${
                   showCenterBadge
                     ? "border-emerald-800 bg-cyan-900/20 text-emerald-950"
-                    : "border-[#3f3f46] bg-[#09090b] text-slate-500"
+                    : "border-white/10 bg-white/5 text-slate-500"
                 }`}
               >
                 <EmblemIcon name={selectedIcon} size={13} />
@@ -347,7 +347,7 @@ export function PrintableLabelSheet({
                 className={`inline-flex flex-1 items-center justify-center gap-1.5 rounded-xl border px-2.5 py-2 font-semibold transition ${
                   showScratchPin
                     ? "border-amber-800 bg-amber-900/10 text-amber-950"
-                    : "border-[#3f3f46] bg-[#09090b] text-slate-500"
+                    : "border-white/10 bg-white/5 text-slate-500"
                 }`}
               >
                 <LockIcon size={13} />
@@ -369,7 +369,7 @@ export function PrintableLabelSheet({
               maxLength={24}
               value={customSealText}
               onChange={(e) => setCustomSealText(e.target.value)}
-              className="rounded-lg border border-[#3f3f46] bg-[#09090b] px-2.5 py-1 text-xs font-bold uppercase tracking-wider text-slate-200 focus:border-[#1B4332] focus:outline-none"
+              className="rounded-lg border border-white/10 bg-white/5 px-2.5 py-1 text-xs font-bold uppercase tracking-wider text-slate-200 focus:border-[#1B4332] focus:outline-none"
             />
           </div>
           <span className="inline-flex items-center gap-1.5 font-mono text-[11px] text-slate-500">
@@ -380,7 +380,7 @@ export function PrintableLabelSheet({
       </div>
 
       {/* Printable Label Sheet Surface */}
-      <div className="print-sheet rounded-3xl border border-[#27272a] bg-[#09090b] p-6 text-white shadow-[0_0_30px_rgba(0,0,0,0.5)]">
+      <div className="print-sheet rounded-3xl border border-white/10 bg-[#09090b]/60 backdrop-blur-xl p-6 text-white shadow-[0_0_40px_rgba(0,0,0,0.5)]">
         <div className="no-print mb-4 flex flex-wrap items-center justify-between gap-2 border-b border-stone-200 pb-3 text-xs text-slate-500">
           <span className="inline-flex items-center gap-1.5">
             <PrinterIcon size={14} className="text-slate-300" />
@@ -399,7 +399,7 @@ export function PrintableLabelSheet({
             <div
               key={unit.unitNumber}
               style={{ borderColor: theme.borderColor }}
-              className={`print-label-card relative flex items-center gap-3 bg-[#18181b] print:bg-white p-3.5 transition hover:shadow-[0_0_15px_rgba(6,182,212,0.15)] ${borderCss}`}
+              className={`print-label-card relative flex items-center gap-3 bg-white/5 backdrop-blur-md print:bg-white p-3.5 transition hover:shadow-[0_0_15px_rgba(6,182,212,0.15)] ${borderCss}`}
             >
               {/* Scannable Vector QR Code with Lucide Outline Emblem */}
               <div className="shrink-0 rounded-xl border border-[#3f3f46] print:border-slate-300 p-1.5 bg-[#09090b] print:bg-white shadow-sm"

@@ -96,12 +96,12 @@ function VerificationContent() {
       <div className="mb-6 flex items-center justify-between">
         <Link
           href="/"
-          className="inline-flex items-center gap-1.5 rounded-xl border border-[#3f3f46] bg-[#18181b] px-3 py-1.5 text-xs font-bold text-slate-300 hover:border-stone-400 transition"
+          className="inline-flex items-center gap-1.5 rounded-xl border border-[#3f3f46] bg-[#09090b]/40 backdrop-blur-2xl px-3 py-1.5 text-xs font-bold text-slate-300 hover:border-stone-400 transition"
         >
           <ArrowLeftIcon size={14} />
           Producer Studio
         </Link>
-        <span className="inline-flex items-center gap-1.5 rounded-full border border-[#3f3f46] bg-[#18181b] px-3 py-1 font-mono text-[11px] font-bold text-slate-300">
+        <span className="inline-flex items-center gap-1.5 rounded-full border border-[#3f3f46] bg-[#09090b]/40 backdrop-blur-2xl px-3 py-1 font-mono text-[11px] font-bold text-slate-300">
           <FileTextIcon size={13} className="text-cyan-400" />
           Passport #{batchId}
         </span>
@@ -133,7 +133,7 @@ function VerificationContent() {
           <button
             type="button"
             onClick={executeClaimCheck}
-            className="mt-4 inline-flex items-center gap-1.5 rounded-xl border border-[#1B4332]/30 bg-[#18181b] px-4 py-2 text-xs font-bold text-cyan-400 hover:bg-[#09090b] transition shadow-sm"
+            className="mt-4 inline-flex items-center gap-1.5 rounded-xl border border-[#1B4332]/30 bg-[#09090b]/40 backdrop-blur-2xl px-4 py-2 text-xs font-bold text-cyan-400 hover:bg-[#09090b] transition shadow-sm"
           >
             <RefreshCwIcon size={13} />
             Simulate 2nd Scan (Test Counterfeit Duplicate Alert)
@@ -164,7 +164,7 @@ function VerificationContent() {
             . If you just purchased this item sealed, it may carry a cloned label.
           </p>
 
-          <div className="mt-5 rounded-2xl border border-amber-300 bg-[#18181b] p-4 text-left">
+          <div className="mt-5 rounded-2xl border border-amber-300 bg-[#09090b]/40 backdrop-blur-2xl p-4 text-left">
             <p className="flex items-center gap-1.5 text-xs font-bold text-amber-950">
               <FlagIcon size={13} className="text-amber-800" />
               Flag Suspected Counterfeit Retail Location
@@ -218,8 +218,8 @@ function VerificationContent() {
 
       {/* Artisanal Digital Product Passport Card */}
       {verification?.metadata && verification.batch && (
-        <section className="mt-6 rounded-3xl border border-[#27272a] bg-[#18181b] p-6 shadow-sm space-y-5">
-          <div className="border-b border-[#27272a] pb-4">
+        <section className="mt-6 rounded-3xl border border-white/10 bg-[#09090b]/40 backdrop-blur-2xl p-6 shadow-sm space-y-5">
+          <div className="border-b border-white/10 pb-4">
             <span className="inline-flex items-center gap-1.5 text-[11px] font-extrabold uppercase tracking-widest text-cyan-400">
               <Building2Icon size={13} />
               {verification.metadata.producerName}
@@ -235,7 +235,7 @@ function VerificationContent() {
           </div>
 
           <div className="grid grid-cols-2 gap-3 text-xs">
-            <div className="rounded-2xl border border-[#27272a] bg-[#09090b] p-3">
+            <div className="rounded-2xl border border-white/10 bg-[#09090b] p-3">
               <span className="flex items-center gap-1 text-slate-500 text-[11px]">
                 <MapPinIcon size={12} className="text-cyan-400" />
                 Origin Terroir
@@ -245,7 +245,7 @@ function VerificationContent() {
               </strong>
             </div>
 
-            <div className="rounded-2xl border border-[#27272a] bg-[#09090b] p-3">
+            <div className="rounded-2xl border border-white/10 bg-[#09090b] p-3">
               <span className="flex items-center gap-1 text-slate-500 text-[11px]">
                 <CalendarIcon size={12} className="text-cyan-400" />
                 Harvest / Batch Date
@@ -255,7 +255,7 @@ function VerificationContent() {
               </strong>
             </div>
 
-            <div className="rounded-2xl border border-[#27272a] bg-[#09090b] p-3">
+            <div className="rounded-2xl border border-white/10 bg-[#09090b] p-3">
               <span className="flex items-center gap-1 text-slate-500 text-[11px]">
                 <TagIcon size={12} className="text-cyan-400" />
                 Batch Lot Code
@@ -265,7 +265,7 @@ function VerificationContent() {
               </strong>
             </div>
 
-            <div className="rounded-2xl border border-[#27272a] bg-[#09090b] p-3">
+            <div className="rounded-2xl border border-white/10 bg-[#09090b] p-3">
               <span className="flex items-center gap-1 text-slate-500 text-[11px]">
                 <ShieldCheckIcon size={12} className="text-cyan-400" />
                 Units Verified
@@ -286,7 +286,7 @@ function VerificationContent() {
                 {verification.metadata.attributes.map((attr, i) => (
                   <div
                     key={i}
-                    className="flex items-center justify-between rounded-xl border border-[#27272a] bg-[#09090b] px-3.5 py-2.5 text-xs"
+                    className="flex items-center justify-between rounded-xl border border-white/10 bg-[#09090b] px-3.5 py-2.5 text-xs"
                   >
                     <span className="inline-flex items-center gap-1.5 font-medium text-slate-400">
                       <AwardIcon size={13} className="text-cyan-400" />
@@ -301,7 +301,7 @@ function VerificationContent() {
             </div>
           )}
 
-          <div className="rounded-2xl border border-[#27272a] bg-[#09090b] p-3.5 font-mono text-[11px] text-slate-400 space-y-1.5">
+          <div className="rounded-2xl border border-white/10 bg-[#09090b] p-3.5 font-mono text-[11px] text-slate-400 space-y-1.5">
             <div className="flex items-center justify-between">
               <span className="inline-flex items-center gap-1.5">
                 <LockIcon size={12} className="text-cyan-400" />
