@@ -1,63 +1,52 @@
-# BatchSnap 📦⚡
+# 📦 BatchSnap | Web3 Provenance Studio
 
-> **No-code batch provenance and anti-counterfeit label generator for small producers.**  
-> Create immutable product records, anchor them to public Layer 2 chains, and generate print-ready cryptographic labels in under 60 seconds.
+[![Node.js Build & SLSA3 Provenance](https://github.com/moeketsi200/BatchSnap/actions/workflows/build-and-slsa.yml/badge.svg)](https://github.com/moeketsi200/BatchSnap/actions/workflows/build-and-slsa.yml)
+[![Framework](https://img.shields.io/badge/Next.js-15-black?logo=next.js)](https://nextjs.org)
+[![Database](https://img.shields.io/badge/Prisma-SQLite-blue?logo=prisma)](https://prisma.io)
 
----
+> **No-code batch provenance and anti-counterfeit label generator for artisanal producers.**  
+> Create immutable product records, anchor them securely, and generate print-ready cryptographic labels in under 60 seconds.
+
+![BatchSnap Architecture](./BatchSnap_Architecture.png)
 
 ## 📌 Problem & Vision
 
-Small producers (coffee roasters, honey harvesters, olive oil estates, boutique cosmetics makers) face growing threats from counterfeiters and gray-market dilution. Enterprise traceability systems (SAP, Oracle, Hyperledger) require expensive vendor contracts, complex server infrastructure, and dedicated IT teams.
+Small producers (coffee roasters, honey harvesters, olive oil estates) face growing threats from counterfeiters and gray-market dilution. Enterprise traceability systems are too expensive and complex.
 
-**BatchSnap** solves this with a mobile-first, zero-overhead utility:
-1. **Producer Side:** Snap a photo of a batch, enter key attributes, and immediately export serialized, print-ready label sheets.
-2. **Consumer Side:** Scan a tamper-evident QR code with any standard smartphone camera to verify authenticity and origin directly in the browser—no Web3 wallet, app download, or gas fees required.
-
----
-
-## ✨ Features
-
-- **No-Code Batch Creation:** Minimal form design tailored for field use. Takes less than a minute on a mobile screen.
-- **Decentralized Storage:** Batch metadata, lab certificates (CoAs), and production photos are pinned to IPFS.
-- **Low-Cost Layer 2 Anchoring:** Stores only the immutable CID hash on-chain (Arbitrum, Base, or Polygon), costing fractions of a cent per batch.
-- **Print-Ready PDF Export:** Automatically compiles serialized QR codes into standard Avery label templates or roll formats for immediate inkjet/thermal printing.
-- **Single-Claim Anti-Counterfeiting:** Detects duplicate scans. If a bad actor prints 50 copies of a single QR code, the first scan claims the genuine token and subsequent scans flash a warning.
-- **Zero-Friction Consumer Portal:** Serverless, read-only static verification web page that queries the blockchain contract via public RPCs.
+**BatchSnap** solves this with a web-first, zero-overhead Web3 utility:
+1. **Producer Side:** Enter key attributes, generate a cryptographic batch, and immediately export serialized, print-ready QR label sheets directly from the browser.
+2. **Consumer Side:** Scan a tamper-evident QR code with any standard smartphone camera to verify authenticity and origin—no Web3 wallet, app download, or gas fees required.
 
 ---
 
-## 🏗️ Architecture
+## ✨ Features & Upgrades
 
-```text
-[ Producer Mobile App ]
-  │
-  ├── 1. Upload Assets & Metadata ──> [ IPFS / Pinata Gateway ]
-  │                                             │
-  │                                         (CID Hash)
-  │                                             │
-  ├── 2. Mint Batch Token (CID) ────> [ Layer 2 Smart Contract ]
-  │                                             │
-  └── 3. Generate Vector Labels                 │
-        │                                       │
-  [ Printable PDF (QR) ]                        │
-        │                                       │
-  [ Consumer Phone ] ──── 4. Scan QR ──> [ Web Verification App ]
-                                                │
-                                         5. Free eth_call RPC
-                                                │
-                                        [ Verified Origin ]
-```
+- **No-Code Studio:** A gorgeous Glassmorphism UI tailored for field use. Takes less than a minute on a mobile or desktop screen.
+- **SQLite / Prisma Backend:** Seamlessly simulates Layer 2 blockchain state and IPFS pinning using a blazingly fast local SQLite database.
+- **Print-Ready CSS Export:** Uses advanced Tailwind `print:` modifiers to automatically compile serialized QR codes into standard Avery label templates (e.g. 5160, 5163) for immediate inkjet printing.
+- **Optics-Optimized QR Codes:** Camera-optimized SVG QR matrices with **Lucide vector emblem** overlays and highly scannable color contrasting. 
+- **Single-Claim Anti-Counterfeiting:** Detects duplicate scans instantly. If a bad actor prints 50 copies of a single QR code, the first scan claims the genuine token and subsequent scans flash a 🚨 Tamper Warning.
+- **Secure CI/CD (SLSA3):** Comes pre-configured with GitHub Actions for automated Webpack building, SLSA Level 3 supply-chain provenance generation, and Datadog Synthetics testing.
+
+---
+
+## 🏗️ Architecture & Workflow
+
+BatchSnap operates in three seamless phases:
+
+1. **Producer Workflow:** The maker inputs harvest data. The backend generates a primary IPFS payload and creates uniquely hashed cryptographic secrets for every single jar/bottle in the batch.
+2. **Ledger Layer:** The batch is anchored (simulated via Prisma SQLite) using the `keccak256` hashes of the secrets. 
+3. **Consumer Workflow:** A buyer scans the physical label. The edge-hosted Next.js portal performs a read-only check against the ledger. The first scan locks the item state to "Claimed", rendering counterfeit clones useless.
 
 ---
 
 ## 🚀 Tech Stack
 
-- **Frontend & App:** Next.js / React Native (Capacitor), Tailwind CSS
-- **Smart Contracts:** Solidity (ERC-1155 Batch Registry via Foundry / OpenZeppelin)
-- **Decentralized Storage:** IPFS via Pinata / Helia
-- **Label Generation:** `@react-pdf/renderer` & `qrcode`
-- **Chain Integration:** `viem` / `wagmi` (Base / Arbitrum / Polygon)
-- **Hosting:** Vercel / Cloudflare Pages
+- **Framework:** Next.js 15 (App Router)
+- **Styling:** Tailwind CSS (Dark Mode, Glassmorphism, Print Media Queries)
+- **Database & ORM:** Prisma + SQLite
+- **Cryptography:** Node.js `crypto` (Ethereum-compatible Keccak-256)
+- **CI/CD:** GitHub Actions (SLSA Generic Generator)
 
 ---
 
@@ -65,28 +54,27 @@ Small producers (coffee roasters, honey harvesters, olive oil estates, boutique 
 
 ```text
 BatchSnap/
-├── contracts/             # Foundry project: Smart contracts & deployment scripts
-│   ├── src/
-│   │   └── BatchRegistry.sol
-│   └── test/
-├── web/                   # Next.js producer dashboard & consumer verification portal
+├── web/                   # Next.js Application Root
+│   ├── prisma/
+│   │   ├── schema.prisma  # SQLite Relational Schema
+│   │   └── dev.db         # Local database state
 │   ├── src/
 │   │   ├── app/
-│   │   │   ├── (producer)/# Batch creation & label print flows
-│   │   │   └── v/[id]/    # Consumer verification screen
-│   │   ├── components/    # Reusable UI & label renderers
-│   │   └── lib/           # IPFS pinning & RPC client logic
-└── package.json
+│   │   │   ├── (producer)/# Producer Web3 Studio & Dashboard
+│   │   │   ├── api/       # Next.js Route Handlers (DB/IPFS)
+│   │   │   └── v/[id]/    # Consumer Verification Screen
+│   │   ├── components/    # Reusable UI & Label Renderers (PrintableLabelSheet)
+│   │   └── lib/           # Prisma Client, Crypto, & Service Logic
+├── .github/workflows/     # CI/CD Pipelines
+└── README.md
 ```
 
 ---
 
-## ⚙️ Quickstart
+## ⚙️ Quickstart (Local Development)
 
 ### Prerequisites
-- Node.js >= 18.x
-- Foundry (for smart contract tests)
-- A Pinata API key (or any IPFS pinning provider)
+- Node.js >= 20.x
 
 ### 1. Clone the repository
 
@@ -95,45 +83,25 @@ git clone git@github.com:moeketsi200/BatchSnap.git
 cd BatchSnap
 ```
 
-### 2. Environment Configuration
+### 2. Database Initialization
 
-Create a `.env.local` file inside the `web/` directory:
-
-```env
-NEXT_PUBLIC_CHAIN_ID=84532               # e.g., Base Sepolia
-NEXT_PUBLIC_RPC_URL="https://sepolia.base.org"
-NEXT_PUBLIC_CONTRACT_ADDRESS="0x..."
-PINATA_JWT="your_pinata_jwt_here"
-```
-
-### 3. Install Dependencies & Run
+The app uses Prisma and SQLite for zero-config local development. Navigate to the `web` folder and push the schema:
 
 ```bash
-# Install root and app dependencies
+cd web
 npm install
-
-# Run the Next.js local development server
-npm run dev --prefix web
+npx prisma db push
 ```
 
-Navigate to `http://localhost:3000` to access the producer dashboard.
+### 3. Run the Development Server
 
----
-
-## 📄 Smart Contract Spec (`BatchRegistry.sol`)
-
-The batch registry uses a gas-minimized model where batches are stored as lightweight structs linked to an IPFS CID:
-
-```solidity
-struct Batch {
-    uint256 batchId;
-    address producer;
-    string ipfsCID;        // Points to JSON containing dates, images, and lab tests
-    bytes32 secretHash;    // Keccak256 hash of single-use validation secret
-    uint256 createdAt;
-    bool isClaimed;
-}
+```bash
+npm run dev
 ```
+
+Navigate to [http://localhost:3000](http://localhost:3000) (or your local network IP) to access the Producer Dashboard.
+
+> **💡 Network Scanning Tip:** If you want to test the physical QR code scanning with your phone, make sure you access the development server on your computer using your local network IP (e.g. `http://192.168.1.x:3000`). The Next.js frontend will dynamically bind that IP into the QR codes so your phone can reach it!
 
 ---
 
@@ -142,15 +110,28 @@ struct Batch {
 Each printed label encodes a URL with two parameters:
 
 ```text
-https://batchsnap.app/v/1024?secret=a8f9c1e0
+http://<your-domain>/v/1001?secret=070fa1f5
 ```
 
-When the consumer scans the item, the verification page sends the secret to the validation endpoint or smart contract:
-- **If `hash(secret) == secretHash` and `isClaimed == false`:** ✅ Green Checkmark (*100% Genuine*). State updates to claimed.
-- **If already claimed:** ⚠️ Yellow / Red Warning (*"This code was already verified on [Timestamp]. Possible duplicate."*).
+When the consumer scans the item, the API performs a transaction:
+- **First Scan:** ✅ Green Checkmark (*"100% Genuine"*). The underlying database updates the unit's timestamp to `claimedAt: <now>`.
+- **Subsequent Scans:** 🚨 Red Warning (*"This code was already verified on [Timestamp]. Possible duplicate."*). Counterfeits are instantly identified.
+
+---
+
+## 🧪 Testing
+
+The backend logic and simulated blockchain state transitions are thoroughly unit-tested. To run the suite:
+
+```bash
+cd web
+npx tsx src/lib/__tests__/backend.test.ts
+```
+
+*(Note: Ensure your database is synchronized before running tests, as the suite resets local state).*
 
 ---
 
 ## 📜 License
 
-Distributed under the MIT License. See `LICENSE` for more information.
+Distributed under the MIT License.
