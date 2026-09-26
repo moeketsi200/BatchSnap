@@ -73,6 +73,17 @@ const PRESETS: Array<{
     purityValue: "Wild-Harvested Kernel Oil",
     storyNote: "Fair-trade women's cooperative cold-press extraction.",
   },
+  {
+    label: "🍷 Reserve Pinotage",
+    productName: "Swartland Bush-Vine Reserve",
+    category: "wine-spirits",
+    producerName: "Riebeek Cellars Estate",
+    originRegion: "Swartland, South Africa",
+    unitCount: 12,
+    coaValue: "WSB Certified • SO2 < 45mg/L",
+    purityValue: "Unfiltered Dry-Farmed Vines",
+    storyNote: "Fermented with wild indigenous yeast in French oak barrels.",
+  },
 ];
 
 export default function ProducerDashboardPage() {
@@ -173,26 +184,30 @@ export default function ProducerDashboardPage() {
           <div>
             <div className="flex items-center gap-2.5">
               <h1 className="text-2xl font-black tracking-tight text-stone-900">
-                BatchSnap Studio
+                BatchSnap Studio ✨
               </h1>
               <span className="rounded-full bg-[#E9F5EE] px-3 py-0.5 text-[11px] font-bold text-[#1B4332] border border-[#B7C9BD]">
-                Artisanal Provenance &amp; QR Seal
+                🌱 Artisanal Provenance &amp; QR Seal
               </span>
             </div>
             <p className="text-xs text-stone-600 mt-0.5">
-              Anchor small-batch harvests to Layer 2 &amp; print tamper-evident cryptographic labels in under 60 seconds
+              🏡 Anchor small-batch harvests to Layer 2 &amp; print tamper-evident cryptographic labels in under 60 seconds
             </p>
           </div>
         </div>
 
         <div className="flex flex-wrap items-center gap-2.5 text-xs">
           <div className="rounded-xl border border-[#E2D9C5] bg-[#FFFDF9] px-3.5 py-2 shadow-sm">
-            <span className="text-stone-500">Network:</span>{" "}
+            <span className="text-stone-500">⛓️ Network:</span>{" "}
             <strong className="text-stone-800">Base L2 (84532)</strong>
           </div>
           <div className="rounded-xl border border-[#E2D9C5] bg-[#FFFDF9] px-3.5 py-2 shadow-sm">
-            <span className="text-stone-500">Pinning:</span>{" "}
+            <span className="text-stone-500">📌 Pinning:</span>{" "}
             <strong className="text-[#1B4332]">IPFS Immutable CID</strong>
+          </div>
+          <div className="rounded-xl border border-[#E2D9C5] bg-[#FFFDF9] px-3.5 py-2 shadow-sm">
+            <span className="text-stone-500">🛡️ Security:</span>{" "}
+            <strong className="text-stone-800">Single-Claim QR</strong>
           </div>
         </div>
       </header>
@@ -204,10 +219,10 @@ export default function ProducerDashboardPage() {
             <div className="mb-4 flex items-center justify-between border-b border-[#EFE8D8] pb-3">
               <div>
                 <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#2D6A4F]">
-                  Step 1 • Producer Origin Record
+                  ✨ Step 1 • Producer Origin Record
                 </span>
                 <h2 className="text-lg font-black text-stone-900">
-                  Create &amp; Anchor Batch
+                  📸 Snap &amp; Anchor Batch
                 </h2>
               </div>
               <span className="rounded-xl bg-[#FAF6F0] border border-[#E2D9C5] px-2.5 py-1 font-mono text-[11px] font-bold text-stone-700">
@@ -218,7 +233,7 @@ export default function ProducerDashboardPage() {
             {/* Quick Producer Presets */}
             <div className="mb-5">
               <span className="block text-[10px] font-bold uppercase tracking-wider text-stone-500 mb-2">
-                Load Craft Producer Preset
+                🎨 Quick-Fill Craft Producer Preset
               </span>
               <div className="flex flex-wrap gap-1.5">
                 {PRESETS.map((preset) => {
@@ -244,7 +259,7 @@ export default function ProducerDashboardPage() {
             <form onSubmit={handleCreateBatch} className="space-y-4">
               <div>
                 <label className="block text-xs font-bold text-stone-700 mb-1">
-                  Batch / Product Name
+                  🏷️ Batch / Product Name
                 </label>
                 <input
                   type="text"
@@ -258,7 +273,7 @@ export default function ProducerDashboardPage() {
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className="block text-xs font-bold text-stone-700 mb-1">
-                    Craft Category
+                    🌾 Craft Category
                   </label>
                   <select
                     value={category}
@@ -272,13 +287,13 @@ export default function ProducerDashboardPage() {
                     <option value="olive-oil">🫒 Estate Olive Oil</option>
                     <option value="cosmetics">🌿 Botanical Skincare</option>
                     <option value="wine-spirits">🍷 Wine &amp; Craft Spirits</option>
-                    <option value="other">📦 Other Artisan Good</option>
+                    <option value="other">✨ Other Artisan Good</option>
                   </select>
                 </div>
 
                 <div>
                   <label className="block text-xs font-bold text-stone-700 mb-1">
-                    Harvest / Roast Date
+                    🗓️ Harvest / Roast Date
                   </label>
                   <input
                     type="date"
@@ -293,7 +308,7 @@ export default function ProducerDashboardPage() {
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className="block text-xs font-bold text-stone-700 mb-1">
-                    Producer / Estate
+                    🏡 Producer / Estate
                   </label>
                   <input
                     type="text"
@@ -306,7 +321,7 @@ export default function ProducerDashboardPage() {
 
                 <div>
                   <label className="block text-xs font-bold text-stone-700 mb-1">
-                    Origin Terroir / Region
+                    📍 Origin Terroir / Region
                   </label>
                   <input
                     type="text"
@@ -321,7 +336,7 @@ export default function ProducerDashboardPage() {
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className="block text-xs font-bold text-stone-700 mb-1">
-                    Lab Certificate (CoA)
+                    🧪 Lab Certificate (CoA)
                   </label>
                   <input
                     type="text"
@@ -333,7 +348,7 @@ export default function ProducerDashboardPage() {
 
                 <div>
                   <label className="block text-xs font-bold text-stone-700 mb-1">
-                    Purity / Grade Spec
+                    🏅 Purity / Grade Spec
                   </label>
                   <input
                     type="text"
@@ -346,7 +361,7 @@ export default function ProducerDashboardPage() {
 
               <div>
                 <label className="block text-xs font-bold text-stone-700 mb-1">
-                  Maker&apos;s Provenance Note
+                  📜 Maker&apos;s Provenance Story
                 </label>
                 <textarea
                   rows={2}
@@ -359,7 +374,7 @@ export default function ProducerDashboardPage() {
               <div className="grid grid-cols-2 gap-3">
                 <div>
                   <label className="block text-xs font-bold text-stone-700 mb-1">
-                    Serialized QR Stickers
+                    🔢 Serialized QR Stickers
                   </label>
                   <input
                     type="number"
@@ -374,7 +389,7 @@ export default function ProducerDashboardPage() {
 
                 <div>
                   <label className="block text-xs font-bold text-stone-700 mb-1">
-                    Default Sheet Layout
+                    🖨️ Default Sheet Layout
                   </label>
                   <select
                     value={labelTemplate}
@@ -383,16 +398,16 @@ export default function ProducerDashboardPage() {
                     }
                     className="w-full rounded-xl border border-[#D8CEB8] bg-[#FAF6F0] px-3 py-2 text-sm font-medium text-stone-900 focus:border-[#1B4332] focus:bg-white focus:outline-none"
                   >
-                    <option value="avery-5160">Avery 5160 (30-up)</option>
-                    <option value="avery-5163">Avery 5163 (10-up)</option>
-                    <option value="thermal-roll">2&quot;×2&quot; Thermal Roll</option>
+                    <option value="avery-5160">📄 Avery 5160 (30-up)</option>
+                    <option value="avery-5163">📦 Avery 5163 (10-up)</option>
+                    <option value="thermal-roll">🎞️ 2&quot;×2&quot; Thermal Roll</option>
                   </select>
                 </div>
               </div>
 
               {error && (
                 <div className="rounded-xl border border-red-300 bg-red-50 p-3 text-xs font-medium text-red-800">
-                  {error}
+                  ⚠️ {error}
                 </div>
               )}
 
@@ -402,7 +417,7 @@ export default function ProducerDashboardPage() {
                 className="w-full rounded-2xl bg-[#1B4332] py-3.5 text-sm font-bold text-[#FAF6F0] shadow-md hover:bg-[#2D6A4F] disabled:opacity-50 transition"
               >
                 {isSubmitting
-                  ? "Pinning to IPFS & Anchoring Batch..."
+                  ? "⏳ Pinning to IPFS & Anchoring Batch..."
                   : `⚡ Anchor Batch & Generate ${unitCount} Scannable Stickers`}
               </button>
             </form>
@@ -413,10 +428,10 @@ export default function ProducerDashboardPage() {
             <div className="flex items-center justify-between mb-3">
               <div>
                 <h3 className="text-sm font-black text-stone-900">
-                  Anchored Provenance Ledger
+                  ⛓️ Anchored Provenance Ledger
                 </h3>
                 <p className="text-[11px] text-stone-500">
-                  Live single-claim scan telemetry from your printed batches
+                  📡 Live single-claim scan telemetry from your printed batches
                 </p>
               </div>
               <button
@@ -424,13 +439,13 @@ export default function ProducerDashboardPage() {
                 onClick={fetchBatches}
                 className="rounded-lg border border-[#D8CEB8] bg-[#FAF6F0] px-2.5 py-1 text-xs font-bold text-[#1B4332] hover:bg-stone-100"
               >
-                Refresh
+                🔄 Refresh
               </button>
             </div>
 
             {recentBatches.length === 0 ? (
               <p className="text-xs text-stone-500 py-2">
-                No batches anchored yet. Mint your first batch above to generate
+                🌱 No batches anchored yet. Mint your first batch above to generate
                 scannable QR stickers.
               </p>
             ) : (
@@ -450,17 +465,17 @@ export default function ProducerDashboardPage() {
                         </span>
                       </div>
                       <p className="font-mono text-[10px] text-stone-500 truncate mt-1">
-                        IPFS: {item.batch.ipfsCID.slice(0, 24)}…
+                        📌 IPFS: {item.batch.ipfsCID.slice(0, 24)}…
                       </p>
                     </div>
 
                     <div className="text-right shrink-0">
                       <span className="inline-block rounded-lg border border-[#D8CEB8] bg-white px-2.5 py-1 font-mono text-[11px] font-bold text-stone-800">
-                        {item.claimedUnits}/{item.totalUnits} Claimed
+                        ✅ {item.claimedUnits}/{item.totalUnits} Claimed
                       </span>
                       {item.tamperReportCount > 0 && (
                         <p className="mt-1 text-[10px] font-bold text-amber-800">
-                          ⚠️ {item.tamperReportCount} Tamper Alert(s)
+                          🚨 {item.tamperReportCount} Tamper Alert(s)
                         </p>
                       )}
                     </div>
@@ -484,18 +499,18 @@ export default function ProducerDashboardPage() {
                 🏷️
               </div>
               <span className="rounded-full bg-[#FAF6F0] border border-[#E2D9C5] px-3 py-0.5 text-[11px] font-bold uppercase tracking-wider text-stone-600">
-                Step 2 • Sticker Customizer &amp; Print Studio
+                🎨 Step 2 • Sticker Customizer &amp; Print Studio
               </span>
               <h2 className="mt-2 text-xl font-black text-stone-900">
-                Your Customizable QR Label Sheet Will Appear Here
+                ✨ Your Customizable QR Label Sheet Will Appear Here
               </h2>
               <p className="mt-2 max-w-md text-xs text-stone-600 leading-relaxed">
                 Fill in your harvest details on the left and click{" "}
                 <strong className="text-[#1B4332]">
-                  Anchor Batch &amp; Generate Scannable Stickers
+                  ⚡ Anchor Batch &amp; Generate Scannable Stickers
                 </strong>
-                . You&apos;ll be able to customize ink colors, apothecary borders,
-                center QR emblems, and print directly to Avery or thermal sheets.
+                . You&apos;ll be able to pick custom emojis (🍯 ☕ 🫒 🌿 🍷), ink colors,
+                apothecary borders, and print directly to Avery or thermal sheets.
               </p>
             </div>
           )}
