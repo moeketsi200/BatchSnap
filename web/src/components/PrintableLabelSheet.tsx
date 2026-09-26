@@ -53,50 +53,50 @@ const COLOR_THEMES: Record<
   forest: { // Cyberpunk Neon
     name: "Cyber Neon",
     swatch: "#06b6d4",
-    qrFg: "#083344", // dark cyan for QR on white so it scans well
-    qrBg: "#ffffff",
+    qrFg: "#06b6d4", // Neon Cyan
+    qrBg: "transparent",
     badgeBg: "#06b6d4",
     badgeText: "#000000",
-    producerColor: "#0891b2",
+    producerColor: "#22d3ee",
     borderColor: "#164e63",
-    accentPillBg: "#cffafe",
-    accentPillText: "#164e63",
+    accentPillBg: "#083344",
+    accentPillText: "#67e8f9",
   },
   espresso: { // Dark Matter
     name: "Dark Matter",
-    swatch: "#6366f1",
-    qrFg: "#1e1b4b",
-    qrBg: "#ffffff",
+    swatch: "#818cf8",
+    qrFg: "#818cf8",
+    qrBg: "transparent",
     badgeBg: "#6366f1",
     badgeText: "#ffffff",
-    producerColor: "#4f46e5",
+    producerColor: "#a5b4fc",
     borderColor: "#3730a3",
-    accentPillBg: "#e0e7ff",
-    accentPillText: "#312e81",
+    accentPillBg: "#1e1b4b",
+    accentPillText: "#c7d2fe",
   },
   terracotta: { // Matrix Green
     name: "Matrix Code",
     swatch: "#22c55e",
-    qrFg: "#052e16",
-    qrBg: "#ffffff",
+    qrFg: "#22c55e",
+    qrBg: "transparent",
     badgeBg: "#22c55e",
     badgeText: "#000000",
-    producerColor: "#16a34a",
+    producerColor: "#4ade80",
     borderColor: "#14532d",
-    accentPillBg: "#dcfce7",
-    accentPillText: "#14532d",
+    accentPillBg: "#052e16",
+    accentPillText: "#86efac",
   },
   monochrome: { // Minimal Web3
     name: "ZK Monochrome",
-    swatch: "#09090b",
-    qrFg: "#000000",
-    qrBg: "#ffffff",
-    badgeBg: "#000000",
-    badgeText: "#ffffff",
-    producerColor: "#3f3f46",
-    borderColor: "#d4d4d8",
-    accentPillBg: "#f4f4f5",
-    accentPillText: "#18181b",
+    swatch: "#fafafa",
+    qrFg: "#fafafa",
+    qrBg: "transparent",
+    badgeBg: "#fafafa",
+    badgeText: "#000000",
+    producerColor: "#e4e4e7",
+    borderColor: "#3f3f46",
+    accentPillBg: "#18181b",
+    accentPillText: "#f4f4f5",
   },
 };
 
@@ -399,10 +399,10 @@ export function PrintableLabelSheet({
             <div
               key={unit.unitNumber}
               style={{ borderColor: theme.borderColor }}
-              className={`print-label-card relative flex items-center gap-3 bg-white p-3.5 transition hover:shadow-md ${borderCss}`}
+              className={`print-label-card relative flex items-center gap-3 bg-[#18181b] print:bg-white p-3.5 transition hover:shadow-[0_0_15px_rgba(6,182,212,0.15)] ${borderCss}`}
             >
               {/* Scannable Vector QR Code with Lucide Outline Emblem */}
-              <div className="shrink-0 rounded-xl border p-1.5 bg-white shadow-sm"
+              <div className="shrink-0 rounded-xl border border-[#3f3f46] print:border-slate-300 p-1.5 bg-[#09090b] print:bg-white shadow-sm"
                 style={{ borderColor: theme.borderColor }}
               >
                 <QrMatrixSvg
@@ -437,11 +437,11 @@ export function PrintableLabelSheet({
                   </span>
                 </div>
 
-                <p className="truncate text-sm font-black text-black mt-0.5">
+                <p className="truncate text-sm font-black text-white print:text-black mt-0.5">
                   {batchData.metadata.productName}
                 </p>
 
-                <p className="mt-0.5 flex items-center gap-2 text-[11px] font-medium text-slate-700 truncate">
+                <p className="mt-0.5 flex items-center gap-2 text-[11px] font-medium text-slate-400 print:text-slate-700 truncate">
                   <span className="inline-flex items-center gap-0.5 truncate">
                     <MapPinIcon size={11} />
                     {batchData.metadata.originRegion}
@@ -465,9 +465,9 @@ export function PrintableLabelSheet({
                   </span>
 
                   {showScratchPin && (
-                    <span className="inline-flex items-center gap-1 rounded border border-slate-300 bg-slate-100 px-1.5 py-0.5 font-mono text-[10px] text-slate-800">
+                    <span className="inline-flex items-center gap-1 rounded border border-[#3f3f46] print:border-slate-300 bg-[#09090b] print:bg-slate-100 px-1.5 py-0.5 font-mono text-[10px] text-slate-300 print:text-slate-800">
                       <LockIcon size={10} />
-                      <strong className="text-black">{unit.secret}</strong>
+                      <strong className="text-white print:text-black">{unit.secret}</strong>
                     </span>
                   )}
                 </div>

@@ -133,7 +133,7 @@ function VerificationContent() {
           <button
             type="button"
             onClick={executeClaimCheck}
-            className="mt-4 inline-flex items-center gap-1.5 rounded-xl border border-[#1B4332]/30 bg-white px-4 py-2 text-xs font-bold text-cyan-400 hover:bg-[#09090b] transition shadow-sm"
+            className="mt-4 inline-flex items-center gap-1.5 rounded-xl border border-[#1B4332]/30 bg-[#18181b] px-4 py-2 text-xs font-bold text-cyan-400 hover:bg-[#09090b] transition shadow-sm"
           >
             <RefreshCwIcon size={13} />
             Simulate 2nd Scan (Test Counterfeit Duplicate Alert)
@@ -164,7 +164,7 @@ function VerificationContent() {
             . If you just purchased this item sealed, it may carry a cloned label.
           </p>
 
-          <div className="mt-5 rounded-2xl border border-amber-300 bg-white p-4 text-left">
+          <div className="mt-5 rounded-2xl border border-amber-300 bg-[#18181b] p-4 text-left">
             <p className="flex items-center gap-1.5 text-xs font-bold text-amber-950">
               <FlagIcon size={13} className="text-amber-800" />
               Flag Suspected Counterfeit Retail Location
