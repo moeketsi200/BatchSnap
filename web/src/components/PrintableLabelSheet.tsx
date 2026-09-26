@@ -176,7 +176,7 @@ export function PrintableLabelSheet({
       <div className="no-print rounded-3xl border border-white/10 bg-[#09090b]/40 backdrop-blur-2xl p-5 shadow-2xl space-y-4">
         <div className="flex flex-wrap items-center justify-between gap-4 border-b border-white/10 pb-4">
           <div>
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               <span className="inline-flex items-center gap-1.5 rounded-full bg-cyan-900/20 px-3 py-1 text-xs font-bold text-cyan-400 border border-cyan-800/30">
                 <ShieldCheckIcon size={14} className="text-cyan-400" />
                 Batch #{batchData.batchId} Anchored
@@ -253,7 +253,7 @@ export function PrintableLabelSheet({
         {/* Customization Controls Grid */}
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-4 text-xs">
           {/* 1. Sheet Template */}
-          <div>
+          <div className="min-w-0">
             <label className="flex items-center gap-1.5 font-bold uppercase tracking-wider text-[10px] text-slate-500 mb-1.5">
               <LayoutGridIcon size={12} />
               Label Sheet Format
@@ -261,7 +261,7 @@ export function PrintableLabelSheet({
             <select
               value={template}
               onChange={(e) => setTemplate(e.target.value as LabelTemplateType)}
-              className="w-full rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-xs font-semibold text-slate-200 focus:border-[#1B4332] focus:outline-none"
+              className="w-full truncate rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-xs font-semibold text-slate-200 focus:border-[#1B4332] focus:outline-none"
             >
               <option value="avery-5160">Avery 5160 (30-up Sheet)</option>
               <option value="avery-5163">Avery 5163 (10-up Large Jar)</option>
@@ -270,12 +270,12 @@ export function PrintableLabelSheet({
           </div>
 
           {/* 2. Color Palette */}
-          <div>
+          <div className="min-w-0">
             <label className="flex items-center gap-1.5 font-bold uppercase tracking-wider text-[10px] text-slate-500 mb-1.5">
               <PaletteIcon size={12} />
               Ink &amp; Seal Palette
             </label>
-            <div className="flex items-center gap-1.5">
+            <div className="flex flex-wrap items-center gap-1.5">
               {(Object.keys(COLOR_THEMES) as StickerColorTheme[]).map((key) => {
                 const item = COLOR_THEMES[key];
                 const active = colorTheme === key;
@@ -303,7 +303,7 @@ export function PrintableLabelSheet({
           </div>
 
           {/* 3. Border Cut Style */}
-          <div>
+          <div className="min-w-0">
             <label className="flex items-center gap-1.5 font-bold uppercase tracking-wider text-[10px] text-slate-500 mb-1.5">
               <ScissorsIcon size={12} />
               Border / Frame Style
@@ -313,7 +313,7 @@ export function PrintableLabelSheet({
               onChange={(e) =>
                 setBorderStyle(e.target.value as StickerBorderStyle)
               }
-              className="w-full rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-xs font-semibold text-slate-200 focus:border-[#1B4332] focus:outline-none"
+              className="w-full truncate rounded-xl border border-white/10 bg-white/5 px-3 py-2 text-xs font-semibold text-slate-200 focus:border-[#1B4332] focus:outline-none"
             >
               <option value="dashed">Perforated Craft Cut (Dashed)</option>
               <option value="double">Apothecary Double Frame</option>
@@ -323,12 +323,12 @@ export function PrintableLabelSheet({
           </div>
 
           {/* 4. Seal & Badge Toggles */}
-          <div>
+          <div className="min-w-0">
             <label className="flex items-center gap-1.5 font-bold uppercase tracking-wider text-[10px] text-slate-500 mb-1.5">
               <ShieldCheckIcon size={12} />
               QR Emblem &amp; PIN Strip
             </label>
-            <div className="flex items-center gap-2">
+            <div className="flex flex-wrap items-center gap-2">
               <button
                 type="button"
                 onClick={() => setShowCenterBadge((v) => !v)}
@@ -359,7 +359,7 @@ export function PrintableLabelSheet({
 
         {/* Custom Seal Banner Text */}
         <div className="flex flex-wrap items-center justify-between gap-3 pt-1 text-xs">
-          <div className="flex items-center gap-2">
+          <div className="flex flex-wrap items-center gap-2">
             <span className="inline-flex items-center gap-1.5 font-semibold text-slate-400">
               <AwardIcon size={14} className="text-cyan-400" />
               Seal Ribbon Text:
