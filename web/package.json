@@ -10,6 +10,7 @@
     "test:backend": "node --experimental-strip-types src/lib/__tests__/backend.test.ts"
   },
   "dependencies": {
+    "@prisma/client": "^5.22.0",
     "@react-pdf/renderer": "^4.1.6",
     "next": "^15.1.0",
     "qrcode": "^1.5.4",
@@ -18,7 +19,6 @@
     "viem": "^2.21.0"
   },
   "devDependencies": {
-    "@prisma/client": "^5.22.0",
     "@types/node": "^22.10.0",
     "@types/qrcode": "^1.5.5",
     "@types/react": "^19.0.0",
