@@ -1,101 +1,108 @@
 "use client";
 
 import React from "react";
+import QRCode from "qrcode";
 
-interface QrMatrixSvgProps {
+export interface QrMatrixSvgProps {
   value: string;
   size?: number;
+  fgColor?: string;
+  bgColor?: string;
+  badgeText?: string;
+  showBadge?: boolean;
   className?: string;
 }
 
 /**
- * Deterministic 21x21 QR-style vector matrix SVG with canonical finder patterns,
- * timing bars, and URL-seeded data modules for instant zero-latency vector printing.
+ * Renders a 100% real, camera-scannable ISO/IEC 18004 QR code as a crisp vector SVG
+ * using the `qrcode` library, with support for custom ink colors and an optional
+ * high-error-correction center emblem badge.
  */
 export function QrMatrixSvg({
   value,
   size = 88,
+  fgColor = "#1B4332",
+  bgColor = "#FFFFFF",
+  badgeText = "✓",
+  showBadge = false,
   className = "",
 }: QrMatrixSvgProps) {
-  const gridSize = 21;
+  const qrData = React.useMemo(() => {
+    try {
+      const qr = QRCode.create(value || "https://batchsnap.app", {
+        errorCorrectionLevel: showBadge ? "H" : "M",
+      });
+      const moduleCount = qr.modules.size;
+      const rawData = qr.modules.data;
+      const cells: Array<{ x: number; y: number }> = [];
 
-  const cells = React.useMemo(() => {
-    const matrix: boolean[][] = Array.from({ length: gridSize }, () =>
-      Array<boolean>(gridSize).fill(false)
-    );
-    const reserved: boolean[][] = Array.from({ length: gridSize }, () =>
-      Array<boolean>(gridSize).fill(false)
-    );
-
-    const placeFinder = (rowOffset: number, colOffset: number) => {
-      for (let r = -1; r <= 7; r++) {
-        for (let c = -1; c <= 7; c++) {
-          const rr = rowOffset + r;
-          const cc = colOffset + c;
-          if (rr < 0 || rr >= gridSize || cc < 0 || cc >= gridSize) continue;
-          reserved[rr][cc] = true;
-          const inOuter =
-            r >= 0 && r <= 6 && c >= 0 && c <= 6 && (r === 0 || r === 6 || c === 0 || c === 6);
-          const inInner = r >= 2 && r <= 4 && c >= 2 && c <= 4;
-          matrix[rr][cc] = inOuter || inInner;
+      for (let r = 0; r < moduleCount; r++) {
+        for (let c = 0; c < moduleCount; c++) {
+          if (rawData[r * moduleCount + c]) {
+            cells.push({ x: c, y: r });
+          }
         }
       }
-    };
-
-    placeFinder(0, 0);
-    placeFinder(0, gridSize - 7);
-    placeFinder(gridSize - 7, 0);
-
-    for (let i = 8; i < gridSize - 8; i++) {
-      reserved[6][i] = true;
-      reserved[i][6] = true;
-      matrix[6][i] = i % 2 === 0;
-      matrix[i][6] = i % 2 === 0;
+      return { moduleCount, cells };
+    } catch {
+      return { moduleCount: 21, cells: [] };
     }
+  }, [value, showBadge]);
 
-    let seed = 2166136261;
-    for (let i = 0; i < value.length; i++) {
-      seed ^= value.charCodeAt(i);
-      seed = Math.imul(seed, 16777619) >>> 0;
-    }
-
-    for (let r = 0; r < gridSize; r++) {
-      for (let c = 0; c < gridSize; c++) {
-        if (reserved[r][c]) continue;
-        seed ^= seed << 13;
-        seed ^= seed >>> 17;
-        seed ^= seed << 5;
-        const charFactor = value.charCodeAt((r * gridSize + c) % value.length);
-        matrix[r][c] = ((seed >>> 0) ^ charFactor) % 2 === 0;
-      }
-    }
-
-    return matrix;
-  }, [value]);
+  const quietZone = 2;
+  const totalViewSize = qrData.moduleCount + quietZone * 2;
+  const centerPos = totalViewSize / 2;
+  const badgeBoxSize = totalViewSize * 0.24;
 
   return (
     <svg
       width={size}
       height={size}
-      viewBox={`0 0 ${gridSize + 2} ${gridSize + 2}`}
+      viewBox={`0 0 ${totalViewSize} ${totalViewSize}`}
       shapeRendering="crispEdges"
       className={className}
-      aria-label={`QR Code for ${value}`}
+      aria-label={`Scannable QR Code for ${value}`}
     >
-      <rect width={gridSize + 2} height={gridSize + 2} fill="#ffffff" rx={1} />
-      {cells.map((row, rIdx) =>
-        row.map((filled, cIdx) =>
-          filled ? (
-            <rect
-              key={`${rIdx}-${cIdx}`}
-              x={cIdx + 1}
-              y={rIdx + 1}
-              width={1}
-              height={1}
-              fill="#090d16"
-            />
-          ) : null
-        )
+      <rect
+        width={totalViewSize}
+        height={totalViewSize}
+        fill={bgColor}
+        rx={1.5}
+      />
+      {qrData.cells.map((cell, idx) => (
+        <rect
+          key={idx}
+          x={cell.x + quietZone}
+          y={cell.y + quietZone}
+          width={1}
+          height={1}
+          fill={fgColor}
+        />
+      ))}
+
+      {showBadge && (
+        <g shapeRendering="geometricPrecision">
+          <rect
+            x={centerPos - badgeBoxSize / 2}
+            y={centerPos - badgeBoxSize / 2}
+            width={badgeBoxSize}
+            height={badgeBoxSize}
+            rx={1.2}
+            fill={bgColor}
+            stroke={fgColor}
+            strokeWidth={0.45}
+          />
+          <text
+            x={centerPos}
+            y={centerPos + badgeBoxSize * 0.26}
+            textAnchor="middle"
+            fontSize={badgeBoxSize * 0.65}
+            fill={fgColor}
+            fontWeight="bold"
+          >
+            {badgeText}
+          </text>
+        </g>
       )}
     </svg>
   );

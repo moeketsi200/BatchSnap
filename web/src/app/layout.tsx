@@ -2,9 +2,9 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "BatchSnap 📦⚡ | No-Code Batch Provenance & Anti-Counterfeit Labels",
+  title: "BatchSnap 📦⚡ | Artisanal Batch Provenance & Cryptographic Label Studio",
   description:
-    "Create immutable product records, anchor them to public Layer 2 chains, and generate print-ready cryptographic labels in under 60 seconds.",
+    "Create immutable product records, anchor them to public Layer 2 chains, and print customizable cryptographic QR labels in under 60 seconds.",
 };
 
 export default function RootLayout({
@@ -14,7 +14,7 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body className="min-h-screen bg-[#090d16] text-slate-100 antialiased selection:bg-emerald-500/30 selection:text-emerald-200">
+      <body className="min-h-screen bg-[#FAF6F0] text-stone-900 antialiased selection:bg-emerald-800/15 selection:text-emerald-950">
         {children}
       </body>
     </html>

@@ -163,194 +163,203 @@ export default function ProducerDashboardPage() {
   };
 
   return (
-    <main className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
-      <header className="no-print mb-8 flex flex-wrap items-center justify-between gap-4 border-b border-slate-800/80 pb-6">
-        <div className="flex items-center gap-3">
-          <div className="flex h-11 w-11 items-center justify-center rounded-2xl bg-emerald-500/15 border border-emerald-500/30 text-2xl">
+    <main className="mx-auto max-w-7xl px-4 py-8 sm:px-6 lg:px-8">
+      {/* Artisanal Studio Header (hidden when printing) */}
+      <header className="no-print mb-8 flex flex-wrap items-center justify-between gap-4 border-b border-[#E2D9C5] pb-6">
+        <div className="flex items-center gap-3.5">
+          <div className="flex h-12 w-12 items-center justify-center rounded-2xl bg-[#1B4332] text-2xl text-[#FAF6F0] shadow-sm">
             📦
           </div>
           <div>
-            <div className="flex items-center gap-2">
-              <h1 className="text-2xl font-extrabold tracking-tight text-white">
-                BatchSnap
+            <div className="flex items-center gap-2.5">
+              <h1 className="text-2xl font-black tracking-tight text-stone-900">
+                BatchSnap Studio
               </h1>
-              <span className="rounded-full bg-emerald-500/15 px-2.5 py-0.5 text-[11px] font-semibold text-emerald-400 border border-emerald-500/30">
-                Layer 2 Provenance
+              <span className="rounded-full bg-[#E9F5EE] px-3 py-0.5 text-[11px] font-bold text-[#1B4332] border border-[#B7C9BD]">
+                Artisanal Provenance &amp; QR Seal
               </span>
             </div>
-            <p className="text-xs text-slate-400">
-              No-code batch provenance &amp; single-claim anti-counterfeit label
-              generator for small producers
+            <p className="text-xs text-stone-600 mt-0.5">
+              Anchor small-batch harvests to Layer 2 &amp; print tamper-evident cryptographic labels in under 60 seconds
             </p>
           </div>
         </div>
 
-        <div className="flex items-center gap-3 text-xs text-slate-400">
-          <div className="rounded-xl border border-slate-800 bg-slate-900/70 px-3 py-2">
-            <span className="text-slate-500">Chain:</span>{" "}
-            <strong className="text-slate-200">Base Sepolia (84532)</strong>
+        <div className="flex flex-wrap items-center gap-2.5 text-xs">
+          <div className="rounded-xl border border-[#E2D9C5] bg-[#FFFDF9] px-3.5 py-2 shadow-sm">
+            <span className="text-stone-500">Network:</span>{" "}
+            <strong className="text-stone-800">Base L2 (84532)</strong>
           </div>
-          <div className="rounded-xl border border-slate-800 bg-slate-900/70 px-3 py-2">
-            <span className="text-slate-500">Storage:</span>{" "}
-            <strong className="text-emerald-400">IPFS Content-Addressed</strong>
+          <div className="rounded-xl border border-[#E2D9C5] bg-[#FFFDF9] px-3.5 py-2 shadow-sm">
+            <span className="text-stone-500">Pinning:</span>{" "}
+            <strong className="text-[#1B4332]">IPFS Immutable CID</strong>
           </div>
         </div>
       </header>
 
       <div className="grid grid-cols-1 gap-8 lg:grid-cols-12">
-        <section className="no-print lg:col-span-5">
-          <div className="rounded-2xl border border-slate-800 bg-slate-900/60 p-6 shadow-xl">
-            <div className="mb-4 flex items-center justify-between">
+        {/* Left Column: Producer Batch Form & Registry */}
+        <section className="no-print lg:col-span-5 space-y-6">
+          <div className="rounded-3xl border border-[#E2D9C5] bg-[#FFFDF9] p-6 shadow-sm">
+            <div className="mb-4 flex items-center justify-between border-b border-[#EFE8D8] pb-3">
               <div>
-                <h2 className="text-lg font-bold text-white">
-                  1. Snap &amp; Mint Batch
+                <span className="text-[10px] font-extrabold uppercase tracking-widest text-[#2D6A4F]">
+                  Step 1 • Producer Origin Record
+                </span>
+                <h2 className="text-lg font-black text-stone-900">
+                  Create &amp; Anchor Batch
                 </h2>
-                <p className="text-xs text-slate-400">
-                  Pin batch metadata to IPFS and generate serialized QR labels.
-                </p>
               </div>
-              <span className="rounded-lg bg-slate-800 px-2.5 py-1 font-mono text-[11px] text-slate-300">
-                ⚡ &lt; 60 sec
+              <span className="rounded-xl bg-[#FAF6F0] border border-[#E2D9C5] px-2.5 py-1 font-mono text-[11px] font-bold text-stone-700">
+                ⚡ 60s Flow
               </span>
             </div>
 
+            {/* Quick Producer Presets */}
             <div className="mb-5">
-              <span className="block text-[11px] font-semibold uppercase tracking-wider text-slate-400 mb-2">
-                Quick-Fill Producer Templates
+              <span className="block text-[10px] font-bold uppercase tracking-wider text-stone-500 mb-2">
+                Load Craft Producer Preset
               </span>
               <div className="flex flex-wrap gap-1.5">
-                {PRESETS.map((preset) => (
-                  <button
-                    key={preset.label}
-                    type="button"
-                    onClick={() => applyPreset(preset)}
-                    className="rounded-lg border border-slate-700/80 bg-slate-950/70 px-2.5 py-1 text-xs text-slate-300 hover:border-emerald-500/50 hover:text-emerald-300 transition"
-                  >
-                    {preset.label}
-                  </button>
-                ))}
+                {PRESETS.map((preset) => {
+                  const active = productName === preset.productName;
+                  return (
+                    <button
+                      key={preset.label}
+                      type="button"
+                      onClick={() => applyPreset(preset)}
+                      className={`rounded-xl border px-2.5 py-1.5 text-xs font-semibold transition ${
+                        active
+                          ? "border-[#1B4332] bg-[#1B4332] text-[#FAF6F0] shadow-sm"
+                          : "border-[#D8CEB8] bg-[#FAF6F0] text-stone-700 hover:border-stone-400"
+                      }`}
+                    >
+                      {preset.label}
+                    </button>
+                  );
+                })}
               </div>
             </div>
 
             <form onSubmit={handleCreateBatch} className="space-y-4">
               <div>
-                <label className="block text-xs font-medium text-slate-300 mb-1">
-                  Product Name
+                <label className="block text-xs font-bold text-stone-700 mb-1">
+                  Batch / Product Name
                 </label>
                 <input
                   type="text"
                   required
                   value={productName}
                   onChange={(e) => setProductName(e.target.value)}
-                  className="w-full rounded-xl border border-slate-700 bg-slate-950 px-3.5 py-2 text-sm text-white focus:border-emerald-500 focus:outline-none"
+                  className="w-full rounded-xl border border-[#D8CEB8] bg-[#FAF6F0] px-3.5 py-2 text-sm font-medium text-stone-900 focus:border-[#1B4332] focus:bg-white focus:outline-none"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-medium text-slate-300 mb-1">
-                    Category
+                  <label className="block text-xs font-bold text-stone-700 mb-1">
+                    Craft Category
                   </label>
                   <select
                     value={category}
                     onChange={(e) =>
                       setCategory(e.target.value as ProductCategory)
                     }
-                    className="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-white focus:border-emerald-500 focus:outline-none"
+                    className="w-full rounded-xl border border-[#D8CEB8] bg-[#FAF6F0] px-3 py-2 text-sm font-medium text-stone-900 focus:border-[#1B4332] focus:bg-white focus:outline-none"
                   >
                     <option value="honey">🍯 Honey &amp; Apiary</option>
                     <option value="coffee">☕ Specialty Coffee</option>
-                    <option value="olive-oil">🫒 Olive Oil</option>
-                    <option value="cosmetics">🌿 Cosmetics / Skincare</option>
+                    <option value="olive-oil">🫒 Estate Olive Oil</option>
+                    <option value="cosmetics">🌿 Botanical Skincare</option>
                     <option value="wine-spirits">🍷 Wine &amp; Craft Spirits</option>
                     <option value="other">📦 Other Artisan Good</option>
                   </select>
                 </div>
 
                 <div>
-                  <label className="block text-xs font-medium text-slate-300 mb-1">
-                    Harvest / Batch Date
+                  <label className="block text-xs font-bold text-stone-700 mb-1">
+                    Harvest / Roast Date
                   </label>
                   <input
                     type="date"
                     required
                     value={harvestDate}
                     onChange={(e) => setHarvestDate(e.target.value)}
-                    className="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-white focus:border-emerald-500 focus:outline-none"
+                    className="w-full rounded-xl border border-[#D8CEB8] bg-[#FAF6F0] px-3 py-2 text-sm font-medium text-stone-900 focus:border-[#1B4332] focus:bg-white focus:outline-none"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-medium text-slate-300 mb-1">
-                    Producer / Estate Name
+                  <label className="block text-xs font-bold text-stone-700 mb-1">
+                    Producer / Estate
                   </label>
                   <input
                     type="text"
                     required
                     value={producerName}
                     onChange={(e) => setProducerName(e.target.value)}
-                    className="w-full rounded-xl border border-slate-700 bg-slate-950 px-3.5 py-2 text-sm text-white focus:border-emerald-500 focus:outline-none"
+                    className="w-full rounded-xl border border-[#D8CEB8] bg-[#FAF6F0] px-3.5 py-2 text-sm font-medium text-stone-900 focus:border-[#1B4332] focus:bg-white focus:outline-none"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-medium text-slate-300 mb-1">
-                    Origin Region
+                  <label className="block text-xs font-bold text-stone-700 mb-1">
+                    Origin Terroir / Region
                   </label>
                   <input
                     type="text"
                     required
                     value={originRegion}
                     onChange={(e) => setOriginRegion(e.target.value)}
-                    className="w-full rounded-xl border border-slate-700 bg-slate-950 px-3.5 py-2 text-sm text-white focus:border-emerald-500 focus:outline-none"
+                    className="w-full rounded-xl border border-[#D8CEB8] bg-[#FAF6F0] px-3.5 py-2 text-sm font-medium text-stone-900 focus:border-[#1B4332] focus:bg-white focus:outline-none"
                   />
                 </div>
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-medium text-slate-300 mb-1">
+                  <label className="block text-xs font-bold text-stone-700 mb-1">
                     Lab Certificate (CoA)
                   </label>
                   <input
                     type="text"
                     value={coaValue}
                     onChange={(e) => setCoaValue(e.target.value)}
-                    className="w-full rounded-xl border border-slate-700 bg-slate-950 px-3.5 py-2 text-sm text-white focus:border-emerald-500 focus:outline-none"
+                    className="w-full rounded-xl border border-[#D8CEB8] bg-[#FAF6F0] px-3.5 py-2 text-sm font-medium text-stone-900 focus:border-[#1B4332] focus:bg-white focus:outline-none"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-medium text-slate-300 mb-1">
-                    Purity / Spec Badge
+                  <label className="block text-xs font-bold text-stone-700 mb-1">
+                    Purity / Grade Spec
                   </label>
                   <input
                     type="text"
                     value={purityValue}
                     onChange={(e) => setPurityValue(e.target.value)}
-                    className="w-full rounded-xl border border-slate-700 bg-slate-950 px-3.5 py-2 text-sm text-white focus:border-emerald-500 focus:outline-none"
+                    className="w-full rounded-xl border border-[#D8CEB8] bg-[#FAF6F0] px-3.5 py-2 text-sm font-medium text-stone-900 focus:border-[#1B4332] focus:bg-white focus:outline-none"
                   />
                 </div>
               </div>
 
               <div>
-                <label className="block text-xs font-medium text-slate-300 mb-1">
-                  Producer Provenance Note
+                <label className="block text-xs font-bold text-stone-700 mb-1">
+                  Maker&apos;s Provenance Note
                 </label>
                 <textarea
                   rows={2}
                   value={storyNote}
                   onChange={(e) => setStoryNote(e.target.value)}
-                  className="w-full rounded-xl border border-slate-700 bg-slate-950 px-3.5 py-2 text-sm text-white focus:border-emerald-500 focus:outline-none"
+                  className="w-full rounded-xl border border-[#D8CEB8] bg-[#FAF6F0] px-3.5 py-2 text-sm font-medium text-stone-900 focus:border-[#1B4332] focus:bg-white focus:outline-none"
                 />
               </div>
 
               <div className="grid grid-cols-2 gap-3">
                 <div>
-                  <label className="block text-xs font-medium text-slate-300 mb-1">
-                    Serialized QR Units
+                  <label className="block text-xs font-bold text-stone-700 mb-1">
+                    Serialized QR Stickers
                   </label>
                   <input
                     type="number"
@@ -359,20 +368,20 @@ export default function ProducerDashboardPage() {
                     required
                     value={unitCount}
                     onChange={(e) => setUnitCount(Number(e.target.value))}
-                    className="w-full rounded-xl border border-slate-700 bg-slate-950 px-3.5 py-2 text-sm text-white focus:border-emerald-500 focus:outline-none"
+                    className="w-full rounded-xl border border-[#D8CEB8] bg-[#FAF6F0] px-3.5 py-2 text-sm font-bold text-stone-900 focus:border-[#1B4332] focus:bg-white focus:outline-none"
                   />
                 </div>
 
                 <div>
-                  <label className="block text-xs font-medium text-slate-300 mb-1">
-                    Label Sheet Format
+                  <label className="block text-xs font-bold text-stone-700 mb-1">
+                    Default Sheet Layout
                   </label>
                   <select
                     value={labelTemplate}
                     onChange={(e) =>
                       setLabelTemplate(e.target.value as LabelTemplateType)
                     }
-                    className="w-full rounded-xl border border-slate-700 bg-slate-950 px-3 py-2 text-sm text-white focus:border-emerald-500 focus:outline-none"
+                    className="w-full rounded-xl border border-[#D8CEB8] bg-[#FAF6F0] px-3 py-2 text-sm font-medium text-stone-900 focus:border-[#1B4332] focus:bg-white focus:outline-none"
                   >
                     <option value="avery-5160">Avery 5160 (30-up)</option>
                     <option value="avery-5163">Avery 5163 (10-up)</option>
@@ -382,7 +391,7 @@ export default function ProducerDashboardPage() {
               </div>
 
               {error && (
-                <div className="rounded-xl border border-red-500/40 bg-red-500/10 p-3 text-xs text-red-300">
+                <div className="rounded-xl border border-red-300 bg-red-50 p-3 text-xs font-medium text-red-800">
                   {error}
                 </div>
               )}
@@ -390,62 +399,68 @@ export default function ProducerDashboardPage() {
               <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full rounded-xl bg-emerald-500 py-3 text-sm font-bold text-slate-950 shadow-lg shadow-emerald-500/20 hover:bg-emerald-400 disabled:opacity-50 transition"
+                className="w-full rounded-2xl bg-[#1B4332] py-3.5 text-sm font-bold text-[#FAF6F0] shadow-md hover:bg-[#2D6A4F] disabled:opacity-50 transition"
               >
                 {isSubmitting
                   ? "Pinning to IPFS & Anchoring Batch..."
-                  : `⚡ Anchor Batch & Generate ${unitCount} QR Labels`}
+                  : `⚡ Anchor Batch & Generate ${unitCount} Scannable Stickers`}
               </button>
             </form>
           </div>
 
-          <div className="mt-6 rounded-2xl border border-slate-800 bg-slate-900/60 p-5">
+          {/* Anchored Batches Ledger */}
+          <div className="rounded-3xl border border-[#E2D9C5] bg-[#FFFDF9] p-5 shadow-sm">
             <div className="flex items-center justify-between mb-3">
-              <h3 className="text-sm font-bold text-white">
-                On-Chain Registry Telemetry
-              </h3>
+              <div>
+                <h3 className="text-sm font-black text-stone-900">
+                  Anchored Provenance Ledger
+                </h3>
+                <p className="text-[11px] text-stone-500">
+                  Live single-claim scan telemetry from your printed batches
+                </p>
+              </div>
               <button
                 type="button"
                 onClick={fetchBatches}
-                className="text-xs text-emerald-400 hover:underline"
+                className="rounded-lg border border-[#D8CEB8] bg-[#FAF6F0] px-2.5 py-1 text-xs font-bold text-[#1B4332] hover:bg-stone-100"
               >
                 Refresh
               </button>
             </div>
 
             {recentBatches.length === 0 ? (
-              <p className="text-xs text-slate-400">
+              <p className="text-xs text-stone-500 py-2">
                 No batches anchored yet. Mint your first batch above to generate
-                tamper-evident QR labels.
+                scannable QR stickers.
               </p>
             ) : (
               <div className="space-y-2.5">
                 {recentBatches.map((item) => (
                   <div
                     key={item.batch.batchId}
-                    className="flex items-center justify-between rounded-xl border border-slate-800 bg-slate-950/70 p-3 text-xs"
+                    className="flex items-center justify-between rounded-2xl border border-[#E6DEC8] bg-[#FAF6F0] p-3 text-xs"
                   >
                     <div className="min-w-0">
                       <div className="flex items-center gap-2">
-                        <span className="font-mono font-bold text-emerald-400">
+                        <span className="rounded bg-[#1B4332] px-1.5 py-0.5 font-mono text-[10px] font-bold text-white">
                           #{item.batch.batchId}
                         </span>
-                        <span className="truncate font-semibold text-slate-200">
+                        <span className="truncate font-bold text-stone-900">
                           {item.metadata?.productName || "Batch Record"}
                         </span>
                       </div>
-                      <p className="font-mono text-[11px] text-slate-500 truncate mt-0.5">
-                        CID: {item.batch.ipfsCID.slice(0, 22)}…
+                      <p className="font-mono text-[10px] text-stone-500 truncate mt-1">
+                        IPFS: {item.batch.ipfsCID.slice(0, 24)}…
                       </p>
                     </div>
 
                     <div className="text-right shrink-0">
-                      <span className="inline-block rounded-md bg-slate-800 px-2 py-0.5 font-mono text-[11px] text-slate-200">
-                        {item.claimedUnits}/{item.totalUnits} Scanned
+                      <span className="inline-block rounded-lg border border-[#D8CEB8] bg-white px-2.5 py-1 font-mono text-[11px] font-bold text-stone-800">
+                        {item.claimedUnits}/{item.totalUnits} Claimed
                       </span>
                       {item.tamperReportCount > 0 && (
-                        <p className="mt-1 text-[10px] font-semibold text-amber-400">
-                          ⚠️ {item.tamperReportCount} Tamper Report(s)
+                        <p className="mt-1 text-[10px] font-bold text-amber-800">
+                          ⚠️ {item.tamperReportCount} Tamper Alert(s)
                         </p>
                       )}
                     </div>
@@ -456,6 +471,7 @@ export default function ProducerDashboardPage() {
           </div>
         </section>
 
+        {/* Right Column: Interactive Sticker Customizer & Print Sheet */}
         <section className="lg:col-span-7">
           {createdBatch ? (
             <PrintableLabelSheet
@@ -463,20 +479,23 @@ export default function ProducerDashboardPage() {
               initialTemplate={labelTemplate}
             />
           ) : (
-            <div className="no-print flex h-full min-h-[420px] flex-col items-center justify-center rounded-2xl border border-dashed border-slate-800 bg-slate-900/30 p-8 text-center">
-              <div className="mb-3 flex h-14 w-14 items-center justify-center rounded-2xl bg-slate-800/80 text-2xl">
-                🖨️
+            <div className="no-print flex h-full min-h-[460px] flex-col items-center justify-center rounded-3xl border-2 border-dashed border-[#D8CEB8] bg-[#FFFDF9]/70 p-10 text-center">
+              <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-2xl bg-[#E9F5EE] border border-[#B7C9BD] text-3xl">
+                🏷️
               </div>
-              <h2 className="text-lg font-bold text-white">
-                Print-Ready Cryptographic Label Sheet
+              <span className="rounded-full bg-[#FAF6F0] border border-[#E2D9C5] px-3 py-0.5 text-[11px] font-bold uppercase tracking-wider text-stone-600">
+                Step 2 • Sticker Customizer &amp; Print Studio
+              </span>
+              <h2 className="mt-2 text-xl font-black text-stone-900">
+                Your Customizable QR Label Sheet Will Appear Here
               </h2>
-              <p className="mt-1 max-w-md text-xs text-slate-400 leading-relaxed">
-                Complete the 60-second batch form on the left and tap{" "}
-                <strong className="text-emerald-400">
-                  Anchor Batch &amp; Generate QR Labels
+              <p className="mt-2 max-w-md text-xs text-stone-600 leading-relaxed">
+                Fill in your harvest details on the left and click{" "}
+                <strong className="text-[#1B4332]">
+                  Anchor Batch &amp; Generate Scannable Stickers
                 </strong>
-                . Your serialized Avery / thermal stickers with single-claim
-                anti-counterfeit URLs will appear here ready to print or test.
+                . You&apos;ll be able to customize ink colors, apothecary borders,
+                center QR emblems, and print directly to Avery or thermal sheets.
               </p>
             </div>
           )}
